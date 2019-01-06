@@ -70,3 +70,15 @@ ip地址:8888 + ...
 ```
 GET /api/login?account=value&passwd=value
 ```
+##### 2 注册
+```
+POST /api/register
+需要提交的数据
+@Insert("insert into users(account,name,passwd) values (#{account},#{name},#{passwd})")
+```
+##### 3 修改用户信息
+```
+POST /api/updateUserInfo
+需要提交的数据
+@Update("update users set name=#{name},gender=#{gender},age=#{age},city=#{city},code=#{code},passwd=#{passwd} where account=#{account}")
+```
