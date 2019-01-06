@@ -18,6 +18,23 @@ UserInfo {
     private Integer score;
 }
 ```
+##### 2 活动
+```
+ActivityInfo {
+    private Integer aid;
+    private Integer status;
+    private String owner;
+    private String city;
+    private String location;
+    private String title;
+    private String details;
+    private String time_start;
+    private String time_end;
+    private Integer score;
+    private Integer num_of_score;
+    private String type;
+}
+```
 
 ### 二、返回格式
 ##### 1 返回数据
@@ -73,12 +90,59 @@ GET /api/login?account=value&passwd=value
 ##### 2 注册
 ```
 POST /api/register
-需要提交的数据
-@Insert("insert into users(account,name,passwd) values (#{account},#{name},#{passwd})")
+需要的数据
+account,name,passwd
 ```
 ##### 3 修改用户信息
 ```
 POST /api/updateUserInfo
-需要提交的数据
-@Update("update users set name=#{name},gender=#{gender},age=#{age},city=#{city},code=#{code},passwd=#{passwd} where account=#{account}")
+需要的数据
+name,gender,age,city,code,passwd,account
+ps:gender的值为0或1，0表示男，1表示女
+```
+##### 4 查询某用户刚创建待审核的活动
+```
+GET /api/userCreatedActivities
+需要的数据
+owner
+```
+##### 5 查询某用户创建已验证发布的活动
+```
+GET /api/userPublishedActivities
+需要的数据
+owner
+```
+##### 6 查询某用户创建已结束的活动
+```
+GET /api/userFinishedActivities
+需要的数据
+owner
+```
+##### 7 查询某用户被撤销的活动
+```
+GET /api/userRepealActivities
+需要的数据
+owner
+```
+##### 8 查询所有已验证发布可参加的活动
+```
+GET /api/publishedActivities
+
+```
+##### 9 查询某种可参加类别的活动
+```
+GET /api/typeActivities
+需要的数据
+type
+```
+##### 10 管理人员查询所有待验证发布的活动
+```
+GET /api/toPublishedActivities
+```
+##### 11 用户创建活动
+```
+GET /api/addActivity
+需要的数据
+owner,city,location,title,details,time_start,time_end,type
+ps：time_start、time_end格式为2019-01-01
 ```
