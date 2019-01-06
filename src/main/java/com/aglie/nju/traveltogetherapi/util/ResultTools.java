@@ -8,13 +8,13 @@ import com.aglie.nju.traveltogetherapi.model.ResultModel;
  */
 public class ResultTools {
     /****
-     * 错误码记录：
+     * 返回码码记录：
      * 0--------success
      * 1001-----Parameter error
      * 1002-----Empty content
      * 1003-----Account exists
      * 1004-----Upload file is empty
-     * 404------Exception throw error
+     * 404------Exception throw error、failed
      *
      * @param resCode--返回码
      * @param resMsg---404服务器内部异常时提示消息(返回码不是404时传空即可)

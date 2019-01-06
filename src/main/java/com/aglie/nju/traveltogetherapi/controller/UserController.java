@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
+
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ResultModel selectUesrByAccount(String account, String passwd){
         try {
@@ -38,5 +39,42 @@ public class UserController {
         } catch (Exception e) {
             return ResultTools.result(404, e.getMessage(), null);
         }
+    }
+
+    @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
+    public ResultModel addUser(UserInfo user){
+        try{
+            UserInfo userInfo = userMapper.selectUserByAccount(user.getAccount());
+            if (userInfo == null) {
+                int code = userMapper.addUser(user);
+                if(code == 1) {
+                    return ResultTools.result(0, "", null);
+                }
+                return ResultTools.result(404, "failed", null);
+            }
+            return ResultTools.result(1003,"",null);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(), null);
+        }
+
+    }
+
+    @RequestMapping(value = {"/updateUserInfo"}, method = RequestMethod.POST)
+    public ResultModel updateUser(UserInfo user){
+        try {
+            if (user.getName() == null || user.getGender() == null || user.getAge() == null ||
+            user.getCity() == null || user.getCode() == null || user.getPasswd() == null || user.getAccount() == null){
+                return  ResultTools.result(1001, "", null);
+            }
+            int code = userMapper.updateUser(user);
+            System.out.println(code);
+            if(code == 1){
+                return ResultTools.result(0, "success", null);
+            }
+            return ResultTools.result(404,"failed", null);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(), null);
+        }
+
     }
 }
