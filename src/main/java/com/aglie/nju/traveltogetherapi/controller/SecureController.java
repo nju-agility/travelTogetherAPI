@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecureController {
     @RequestMapping(value = {"/secure/login"}, method = RequestMethod.GET)
     public ResultModel loginSuccess() {
-//        System.out.println("Token: success!");
+        System.out.println("Token: success!");
         return ResultTools.result(0,"",null);
     }
 }
