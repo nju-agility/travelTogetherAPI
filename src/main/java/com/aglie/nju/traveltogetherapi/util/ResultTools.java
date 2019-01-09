@@ -7,7 +7,7 @@ import com.aglie.nju.traveltogetherapi.model.ResultModel;
  * 请求结果处理类
  */
 public class ResultTools {
-    /****
+    /***
      * 返回码码记录：
      * 0--------success
      * 1001-----Parameter error
