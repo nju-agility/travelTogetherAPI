@@ -20,19 +20,19 @@ public class FileTools {
      */
     public static ImagePath imgPath(ImagePath img, String account, String suffixName){
         if(img.getItem()==0){
-            String path = "/travelPic/headPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/headPic/" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==1){
-            String path = "/travelPic/codePic/" + account + suffixName; // 新文件名
+            String path = "travelPic/codePic/" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==2){
-            String path = "/travelPic/commentPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/commentPic/" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==3){
-            String path = "/travelPic/activityPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/activityPic/" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else{
