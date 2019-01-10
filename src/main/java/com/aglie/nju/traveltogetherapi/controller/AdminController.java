@@ -19,14 +19,14 @@ public class AdminController {
     private AdminMapper adminMapper;
 
     @RequestMapping(value = {"/adminLogin"}, method = RequestMethod.GET)
-    public ResultModel selectAdminByAccount(String accout, String passwd) {
+    public ResultModel selectAdminByAccount(String account, String passwd) {
 
-        System.out.println("acc:"+accout+",pass:"+passwd);
+        System.out.println("acc:"+account+",pass:"+passwd);
         try{
-            if(accout == null || passwd == null){
+            if(account == null || passwd == null){
                 return ResultTools.result(1001, "", null);
             }
-            AdminInfo adminInfo = adminMapper.selectAdminByAccount(accout);
+            AdminInfo adminInfo = adminMapper.selectAdminByAccount(account);
             System.out.println("adminInfo:"+adminInfo.getAccount()+","+adminInfo.getPasswd());
             if(adminInfo == null){
                 return ResultTools.result(1002, "", null);
