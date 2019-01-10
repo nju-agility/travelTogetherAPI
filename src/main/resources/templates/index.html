@@ -39,7 +39,7 @@
             var data = JSON.parse(xmlhttp.responseText);
             console.log(data);
             if(data.resCode == 0){
-              location.replace("/manage.html");
+              location.replace("/manage");
             }
           }else if( xmlhttp.status == 404){
             alert("请求不成功");
