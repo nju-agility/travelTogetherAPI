@@ -39,18 +39,15 @@ public class ImageController {
         String fileName = file.getOriginalFilename();  // 文件名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
         img = FileTools.imgPath(img, account,suffixName);
-        fileName = img.getPath();
-        System.out.println(fileName);
-//        File dest = new File(fileName);
+        fileName = img.getFileName();
+        String filePath = img.getPath();
+        System.out.println(filePath+"/"+fileName);
+        File dest = new File(new File(filePath).getAbsolutePath()+ "/" + fileName);
+        if (!dest.getParentFile().exists()) {
+            dest.getParentFile().mkdirs();
+        }
         try {
-//            file.transferTo(dest);
-//            file.transferTo(new File(fileName));
-//            int read = 0;
-//            FileOutputStream out = new FileOutputStream(new File(fileName));
-//            out.write(file.getBytes());
-//            out.flush();
-//            out.close();
-            FileTools.uploadFile(file.getBytes(),fileName);
+            file.transferTo(dest);
         } catch (Exception e) {
             return ResultTools.result(404,e.getMessage(),null);
         }
