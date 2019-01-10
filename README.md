@@ -185,9 +185,26 @@ GET /api/adminLogin
 需要的数据
 accout,passwd
 ```
-##### 17 管理员登录
+##### 17 管理员验证发布或取消一个活动
 ```
-GET /api/adminLogin
+POST /api/checkActivity
 需要的数据
-accout,passwd
+aid,status
+ps：传入的status应为1或3，1代表审核通过，3代表审核不通过
+```
+##### 18 管理员验证发布或取消多个活动
+```
+POST /api/checkActivities
+需要的数据类似如下格式
+[
+	{
+		"aid":1,
+		"status":1
+	},
+	{
+		"aid":9,
+		"status":5
+	}
+]
+
 ```
