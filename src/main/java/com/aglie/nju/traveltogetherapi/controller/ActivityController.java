@@ -113,6 +113,38 @@ public class ActivityController {
         }
     }
 
+    //按城市查询可参加的所有活动
+    @RequestMapping(value = {"/cityActivities"}, method = RequestMethod.GET)
+    public ResultModel selectCityActivities(String city){
+        try{
+            if(city == null){
+                return ResultTools.result(1001,"",null);
+            }
+            List<ActivityInfo> activities = activityMapper.selectCityActivities(city);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", activities);
+            return ResultTools.result(0,"",map);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(),null);
+        }
+    }
+
+    //按城市查询可参加的所有活动
+    @RequestMapping(value = {"/cityAndTypeActivities"}, method = RequestMethod.GET)
+    public ResultModel selectCityActivities(String city, String type){
+        try{
+            if(city == null || type == null){
+                return ResultTools.result(1001,"",null);
+            }
+            List<ActivityInfo> activities = activityMapper.selectCityAndTypeActivities(city,type);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", activities);
+            return ResultTools.result(0,"",map);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(),null);
+        }
+    }
+
     //管理人员查询所有待验证发布的活动
     @RequestMapping(value = {"/toPublishedActivities"}, method = RequestMethod.GET)
     public ResultModel selectToPublishedActivities(){

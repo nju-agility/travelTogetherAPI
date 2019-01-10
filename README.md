@@ -83,9 +83,18 @@ private Map<String, Object> data;//数据源
 ip地址:8888 + ...
 如：localhost:8888/api/login?account=123@qq.com&passwd=123
 ```
-##### 1 登录
+##### 1 登录(本地不存在Token的情况)
 ```
 GET /api/login?account=value&passwd=value
+请求成功返回的数据为：
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": {
+        "account": "123@qq.com",
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwicm9sZXMiOiJtZW1iZXIiLCJpYXQiOjE1NDcwOTQ1MDR9.3mzz8v1nc0dgryHy4NtnKoGCVtui-EeRLR30RovNwCE"
+    }
+}
 ```
 ##### 2 注册
 ```
@@ -145,4 +154,40 @@ GET /api/addActivity
 需要的数据
 owner,city,location,title,details,time_start,time_end,type
 ps：time_start、time_end格式为2019-01-01
+```
+##### 12 登录(本地存在Token的情况)
+```
+GET /api/secure/login
+ps：请求的Headers中，需要将Authorization设置为："Bearer "+Token
+    Content-Type设置为：application/json
+```
+##### 13 获取用户信息
+```
+GET /api/userInfo
+需要的数据
+account
+```
+##### 14 按城市查询可参加的所有活动
+```
+GET /api/cityActivities
+需要的数据
+city
+```
+##### 15 按城市查询可参加的某个类别的活动
+```
+GET /api/cityAndTypeActivities
+需要的数据
+city,type
+```
+##### 16 管理员登录
+```
+GET /api/adminLogin
+需要的数据
+accout,passwd
+```
+##### 17 管理员登录
+```
+GET /api/adminLogin
+需要的数据
+accout,passwd
 ```

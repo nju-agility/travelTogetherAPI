@@ -33,6 +33,14 @@ public interface ActivityMapper {
     @Select("select * from activities where type = #{type} and status = 1")
     public List<ActivityInfo> selectTypeActivities(String type);
 
+    /*******查询某个城市的活动********/
+    @Select("select * from activities where city = #{city} and status = 1")
+    public List<ActivityInfo> selectCityActivities(String city);
+
+    /*******查询某个城市某个类别的活动********/
+    @Select("select * from activities where city = #{city} and status = 1 and type = #{type}")
+    public List<ActivityInfo> selectCityAndTypeActivities(String city, String type);
+
     /*******管理人员查询所有待验证发布的活动********/
     @Select("select * from activities where status = 0")
     public List<ActivityInfo> selectToPublishedActivities();

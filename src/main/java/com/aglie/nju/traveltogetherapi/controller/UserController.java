@@ -2,7 +2,6 @@ package com.aglie.nju.traveltogetherapi.controller;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
@@ -37,6 +36,7 @@ public class UserController {
                         claim("roles","member").setIssuedAt(new Date()).
                         signWith(SignatureAlgorithm.HS256, "secretkey").compact();
                 Map<String, Object> map = new HashMap<String, Object>();
+                map.put("account",user.getAccount());
                 map.put("token",jwtToken);
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);
@@ -82,6 +82,24 @@ public class UserController {
         }catch (Exception e){
             return ResultTools.result(404, e.getMessage(), null);
         }
+    }
 
+    @RequestMapping(value = {"/userInfo"}, method = RequestMethod.GET)
+    public ResultModel selectUesrByAccount(String account){
+        try {
+            if (account == null) {
+                return ResultTools.result(1001, "", null);
+            }
+            UserInfo user = userMapper.selectUserByAccount(account);
+            if (null == user) {
+                return ResultTools.result(1002, "", null);
+            }
+            Map<String, Object> map = new HashMap<String, Object>();
+            user.setPasswd("****");
+            map.put("content", user);
+            return ResultTools.result(0, "", map);
+        } catch (Exception e) {
+            return ResultTools.result(404, e.getMessage(), null);
+        }
     }
 }
