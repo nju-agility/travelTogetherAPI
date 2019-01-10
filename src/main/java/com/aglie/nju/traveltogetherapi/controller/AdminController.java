@@ -20,6 +20,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/adminLogin"}, method = RequestMethod.GET)
     public ResultModel selectAdminByAccount(String accout, String passwd) {
+
         System.out.println("acc:"+accout+",pass:"+passwd);
         try{
             if(accout == null || passwd == null){
