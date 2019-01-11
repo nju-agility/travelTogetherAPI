@@ -21,6 +21,12 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 用户在无Token情况下登录
+     * @param account
+     * @param passwd
+     * @return
+     */
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ResultModel selectUesrByAccount(String account, String passwd){
         try {
@@ -37,6 +43,7 @@ public class UserController {
                         signWith(SignatureAlgorithm.HS256, "secretkey").compact();
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("account",user.getAccount());
+                map.put("name",user.getName());
                 map.put("token",jwtToken);
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);
@@ -48,6 +55,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
     public ResultModel addUser(UserInfo user){
         try{
@@ -66,6 +78,11 @@ public class UserController {
 
     }
 
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
     @RequestMapping(value = {"/updateUserInfo"}, method = RequestMethod.POST)
     public ResultModel updateUser(UserInfo user){
         try {
@@ -84,6 +101,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 查看用户信息
+     * @param account
+     * @return
+     */
     @RequestMapping(value = {"/userInfo"}, method = RequestMethod.GET)
     public ResultModel selectUesrByAccount(String account){
         try {

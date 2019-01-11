@@ -91,6 +91,7 @@ GET /api/login?account=value&passwd=value
     "resCode": 0,
     "resMsg": "success",
     "data": {
+        "name": "zhangsan",
         "account": "123@qq.com",
         "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwicm9sZXMiOiJtZW1iZXIiLCJpYXQiOjE1NDcwOTQ1MDR9.3mzz8v1nc0dgryHy4NtnKoGCVtui-EeRLR30RovNwCE"
     }
@@ -99,8 +100,16 @@ GET /api/login?account=value&passwd=value
 ##### 2 注册
 ```
 POST /api/register
+----------------------------
 需要的数据
 account,name,passwd
+----------------------------
+返回的数据
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": null
+}
 ```
 ##### 3 修改用户信息
 ```
@@ -108,6 +117,13 @@ POST /api/updateUserInfo
 需要的数据
 name,gender,age,city,code,passwd,account
 ps:gender的值为0或1，0表示男，1表示女
+----------------------------
+返回的数据
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": null
+}
 ```
 ##### 4 查询某用户刚创建待审核的活动
 ```
@@ -120,6 +136,44 @@ owner
 GET /api/userPublishedActivities
 需要的数据
 owner
+----------------------------
+返回的数据
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": {
+        "content": [
+            {
+                "aid": 1,
+                "status": 1,
+                "owner": "123@qq.com",
+                "city": "南京",
+                "location": "鼓楼",
+                "title": "1",
+                "details": "1",
+                "time_start": "2019-01-01",
+                "time_end": "2020-01-01",
+                "score": 100,
+                "num_of_score": 1,
+                "type": "outgoing"
+            },
+            {
+                "aid": 10,
+                "status": 1,
+                "owner": "123@qq.com",
+                "city": "南京",
+                "location": "鼓楼",
+                "title": "逛街",
+                "details": "qw",
+                "time_start": "2019-01-06",
+                "time_end": "2019-01-07",
+                "score": 100,
+                "num_of_score": 1,
+                "type": "花钱"
+            }
+        ]
+    }
+}
 ```
 ##### 6 查询某用户创建已结束的活动
 ```
@@ -160,12 +214,50 @@ ps：time_start、time_end格式为2019-01-01
 GET /api/secure/login
 ps：请求的Headers中，需要将Authorization设置为："Bearer "+Token
     Content-Type设置为：application/json
+
+返回的数据
+失败：
+{
+    "timestamp": "2019-01-11T03:48:24.748+0000",
+    "status": 500,
+    "error": "Internal Server Error",
+    "message": "Missing or invalid Authorization header",
+    "path": "/api/secure/login"
+}
+成功：
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": null
+}
 ```
 ##### 13 获取用户信息
 ```
 GET /api/userInfo
 需要的数据
 account
+
+返回的数据
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": {
+        "content": {
+            "account": "123@qq.com",
+            "name": "123",
+            "gender": 0,
+            "age": 18,
+            "in": 0,
+            "activity_id": 0,
+            "city": "南京",
+            "status": 0,
+            "code": null,
+            "passwd": "****",
+            "num_Of_score": 1,
+            "score": 100
+        }
+    }
+}
 ```
 ##### 14 按城市查询可参加的所有活动
 ```
@@ -185,9 +277,52 @@ GET /api/adminLogin
 需要的数据
 accout,passwd
 ```
-##### 17 管理员登录
+##### 17 管理员验证发布或取消一个活动
 ```
-GET /api/adminLogin
+POST /api/checkActivity
 需要的数据
-accout,passwd
+aid,status
+ps：传入的status应为1或3，1代表审核通过，3代表审核不通过
+```
+##### 18 管理员验证发布或取消多个活动
+```
+POST /api/checkActivities
+需要的数据类似如下格式
+[
+	{
+		"aid":1,
+		"status":1
+	},
+	{
+		"aid":9,
+		"status":5
+	}
+]
+```
+##### 19 上传一张图片
+```
+POST /api/uploadImg
+----------------------------
+需要的数据
+file、accout、item
+ps：account为唯一标识，用户头像为account
+活动为aid
+item的值为0，1，2，3
+0-->头像    1-->学生证照等
+2-->评论图  3-->活动图片
+----------------------------
+返回数据
+{
+    "resCode": 0,
+    "resMsg": "success",
+    "data": null
+}
+```
+##### 20 获取一张图片
+```
+《暂时不可用》
+POST /api/uploadImg
+需要的数据
+accout、item
+ps：返回值为BufferImage
 ```
