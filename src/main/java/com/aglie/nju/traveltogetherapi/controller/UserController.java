@@ -43,6 +43,7 @@ public class UserController {
                         signWith(SignatureAlgorithm.HS256, "secretkey").compact();
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("account",user.getAccount());
+                map.put("name",user.getName());
                 map.put("token",jwtToken);
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);

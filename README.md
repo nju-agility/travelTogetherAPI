@@ -91,6 +91,7 @@ GET /api/login?account=value&passwd=value
     "resCode": 0,
     "resMsg": "success",
     "data": {
+        "name": "zhangsan",
         "account": "123@qq.com",
         "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjNAcXEuY29tIiwicm9sZXMiOiJtZW1iZXIiLCJpYXQiOjE1NDcwOTQ1MDR9.3mzz8v1nc0dgryHy4NtnKoGCVtui-EeRLR30RovNwCE"
     }
