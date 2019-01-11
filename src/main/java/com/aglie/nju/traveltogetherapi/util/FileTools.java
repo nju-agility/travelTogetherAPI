@@ -4,6 +4,7 @@ import com.aglie.nju.traveltogetherapi.model.ImagePath;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 public class FileTools {
     /**
@@ -49,5 +50,20 @@ public class FileTools {
         out.write(file);
         out.flush();
         out.close();
+    }
+
+    public static ArrayList<String> getFiles(String path) {
+        ArrayList<String> files = new ArrayList<String>();
+        File file = new File(path);
+        File[] tempList = file.listFiles();
+
+        for (int i = 0; i < tempList.length; i++) {
+            if (tempList[i].isFile()) {
+                files.add(tempList[i].toString());
+            }
+            if (tempList[i].isDirectory()) {
+            }
+        }
+        return files;
     }
 }
