@@ -12,35 +12,44 @@
     <title>Signin</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
+    <!--<script type="text/javascript" href="jquery-3.3.1.js"></script>-->
+    <!--<script type="text/javascript" href="js/bootstrap.js" >    </script>-->
+
     <script>
-      function checklogin(name, value) {
-          var email = document.getElementById("inputEmail");
-          var password = document.getElementById("inputPassword");
+      function checklogin() {
+        var email = document.getElementById("inputEmail");
+        var password = document.getElementById("inputPassword");
+        var button = document.getElementById('login');
 
-          var xmlhttp = new XMLHttpRequest();
-          xmlhttp.open("GET","http://47.100.119.155:8888/api/adminLogin?"
-              +"account="+email.value+"&" + "passwd="+password.value,true);
-          xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-          xmlhttp.send();
-          xmlhttp.onreadystatechange=function () {
-              if( xmlhttp.status == 200 ){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","/api/adminLogin?"
+                +"account="+email.value+"&" + "passwd="+password.value,true);
 
-                    alert("请求成功");
-              }else{
-                  alert("请求不成功");
-              }
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function () {
+          if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ){
+
+            alert("请求成功");
+            var data = JSON.parse(xmlhttp.responseText);
+            console.log(data);
+            if(data.resCode == 0){
+              location.replace("/manage");
+            }
+          }else if( xmlhttp.status == 404){
+            alert("请求不成功");
           }
+        }
 
       }
 
-    </script>
 
+    </script>
   </head>
 
   <body>
@@ -58,7 +67,7 @@
             <input type="checkbox" value="remember-me" name="checkbox"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="button" name="login" onclick="checklogin()">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" id='login' type="button" name="login" onclick="checklogin()"  >Sign in</button>
       </form>
 
     </div> <!-- /container -->
