@@ -151,9 +151,9 @@ public class UserController {
                 return ResultTools.result(1002, "", null);
             }
             Map<String, Object> map = new HashMap<String, Object>();
-            user.setPasswd("****");
+//            user.setPasswd("****");
+            user.setHeadURL("/image/" + FileTools.getImg(user.getAccount(),0));
             map.put("content", user);
-            map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
             return ResultTools.result(0, "", map);
         } catch (Exception e) {
             return ResultTools.result(404, e.getMessage(), null);

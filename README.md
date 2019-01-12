@@ -335,6 +335,4 @@ activity_id
 POST /api/getRecord
 需要的数据
 account
-返回的数据
-
 ```

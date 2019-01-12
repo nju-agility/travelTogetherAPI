@@ -14,6 +14,7 @@ public class UserInfo {
     private Integer num_Of_score;
     private Integer score;
     private String school;
+    private String headURL;
 
     public String getAccount() {
         return account;
@@ -117,5 +118,13 @@ public class UserInfo {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getHeadURL(){
+        return headURL;
+    }
+
+    public void setHeadURL(String headURL){
+        this.headURL = headURL;
     }
 }

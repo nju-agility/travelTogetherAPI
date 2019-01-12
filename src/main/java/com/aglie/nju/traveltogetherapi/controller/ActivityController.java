@@ -1,8 +1,10 @@
 package com.aglie.nju.traveltogetherapi.controller;
 
 import com.aglie.nju.traveltogetherapi.mapper.ActivityMapper;
+import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
+import com.aglie.nju.traveltogetherapi.model.UserInfo;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import com.aglie.nju.traveltogetherapi.util.CkeckParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.Map;
 public class ActivityController {
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     //查询某用户刚创建待审核的活动
     @RequestMapping(value = {"/userCreatedActivities"}, method = RequestMethod.GET)
@@ -183,6 +187,11 @@ public class ActivityController {
             }
             int code = activityMapper.addActivity(activity);
             if(code == 1) {
+                ActivityInfo activityInfo = activityMapper.selectActivity(activity.getOwner(),activity.getTime_start());
+                System.out.println(activityInfo.getAid());
+                UserInfo user = userMapper.selectUserByAccount(activityInfo.getOwner());
+                user.setActivity_id(activityInfo.getAid());
+                userMapper.updateUser(user);
                 return ResultTools.result(0, "", null);
             }
             return ResultTools.result(404, "failed", null);

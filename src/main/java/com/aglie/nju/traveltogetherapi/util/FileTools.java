@@ -84,7 +84,7 @@ public class FileTools {
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }
-            return "Dont't find image!";
+            return "default.jpg";
         }else if(item == 1){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
