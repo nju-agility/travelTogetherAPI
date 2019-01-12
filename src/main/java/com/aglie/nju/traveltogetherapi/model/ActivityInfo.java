@@ -14,6 +14,7 @@ public class ActivityInfo {
     private Integer score;
     private Integer num_of_score;
     private String type;
+    private Integer price;
 
     public String getType() {
         return type;

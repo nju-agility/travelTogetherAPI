@@ -30,4 +30,8 @@ public interface UserMapper {
     @Update("update users set activity_id=#{activity_id} where account=#{account}")
     public int userAttendActivity(UserInfo user);
 
+    /*******用户退出活动********/
+    @Update("update users set activity_id=#{activity_id} where account=#{account}")
+    public int userQuitActivity(UserInfo user);
+
 }

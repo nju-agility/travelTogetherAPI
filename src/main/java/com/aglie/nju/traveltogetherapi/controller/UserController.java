@@ -120,13 +120,21 @@ public class UserController {
             if (user.getAccount() ==null || user.getActivity_id() == null){
                 return  ResultTools.result(1001, "", null);
             }
+            UserInfo userInfo = userMapper.selectUserByAccount(user.getAccount());
+            if(userInfo.getActivity_id() != 0 ){
+                return ResultTools.result(1003,"",null);
+            }
             int code = userMapper.userAttendActivity(user);
             System.out.println(code);
             if(code == 1){
                 RecordInfo recordInfo = new RecordInfo();
                 recordInfo.setAccount(user.getAccount());
                 recordInfo.setAid(user.getActivity_id());
-                recordMapper.insertUserRecords(recordInfo);
+                try {
+                    recordMapper.insertUserRecords(recordInfo);
+                }catch (Exception e){
+                    return ResultTools.result(1003,"",null);
+                }
                 return ResultTools.result(0, "success", null);
             }
             return ResultTools.result(404,"failed", null);
@@ -134,6 +142,37 @@ public class UserController {
             return ResultTools.result(404, e.getMessage(), null);
         }
     }
+
+    /**
+     * 用户退出活动活动
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = {"/userQuitActivity"}, method = RequestMethod.GET)
+    public ResultModel userQuitActivity(UserInfo user){
+        try {
+            if (user.getAccount() ==null){
+                return  ResultTools.result(1001, "", null);
+            }
+            UserInfo userInfo = userMapper.selectUserByAccount(user.getAccount());
+            Integer aid = userInfo.getActivity_id();
+            RecordInfo recordInfo = new RecordInfo();
+            recordInfo.setAid(aid);
+            recordInfo.setAccount(user.getAccount());
+            recordInfo = recordMapper.selectUserRecord(recordInfo);
+            recordMapper.deleteUserRecord(recordInfo);
+            user.setActivity_id(0);
+            int code = userMapper.userQuitActivity(user);
+            System.out.println(code);
+            if(code == 1){
+                return ResultTools.result(0, "success", null);
+            }
+            return ResultTools.result(404,"failed", null);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(), null);
+        }
+    }
+
 
     /**
      * 查看用户信息

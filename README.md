@@ -336,3 +336,9 @@ POST /api/getRecord
 需要的数据
 account
 ```
+##### 23 用户退出活动
+```
+POST /api/userQuitActivity
+需要的数据
+account
+```

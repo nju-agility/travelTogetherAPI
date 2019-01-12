@@ -185,6 +185,10 @@ public class ActivityController {
             if (!CkeckParameter.checkActivity(activity)){
                 return ResultTools.result(1001,"",null);
             }
+            ActivityInfo ac = activityMapper.selectActivity(activity.getOwner(), activity.getTime_start());
+            if (ac != null){
+                return ResultTools.result(1003,"",null);
+            }
             int code = activityMapper.addActivity(activity);
             if(code == 1) {
                 ActivityInfo activityInfo = activityMapper.selectActivity(activity.getOwner(),activity.getTime_start());
