@@ -84,6 +84,22 @@ public class ActivityController {
         }
     }
 
+    //查询某用户正在参加的活动
+    @RequestMapping(value = {"/userAttendActivity"}, method = RequestMethod.GET)
+    public ResultModel selectUserAttendActivity(Integer activity_id){
+        try{
+            if (activity_id == null){
+                return ResultTools.result(1001,"",null);
+            }
+            List<ActivityInfo> activities = activityMapper.selectUserAttendActivity(activity_id);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", activities);
+            return ResultTools.result(0,"",map);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(),null);
+        }
+    }
+
     //查询所有已验证发布的活动
     @RequestMapping(value = {"/publishedActivities"}, method = RequestMethod.GET)
     public ResultModel selectPublishedActivities(){

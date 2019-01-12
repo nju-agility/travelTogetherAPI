@@ -22,8 +22,16 @@ public interface ActivityMapper {
     public List<ActivityInfo> selectUserFinishedActivities(String owner);
 
     /*******查询某用户被撤销的活动********/
-    @Select("select * from activities where status = 5 and owner = #{owner}")
+    @Select("select * from activities where status = 3 and owner = #{owner}")
     public List<ActivityInfo> selectUserRepealActivities(String owner);
+
+    /*******查询某用户正在参加的活动********/
+    @Select("select * from activities where status = 4 and aid = #{activity_id}")
+    public List<ActivityInfo> selectUserAttendActivity(Integer activity_id);
+
+    /*******查询某用户参加过的活动********/
+    @Select("select * from activities where status = 5 and aid = #{activity_id}")
+    public ActivityInfo selectAttendedActivity(Integer activity_id);
 
     /*******查询所有已验证发布的活动********/
     @Select("select * from activities where status = 1")

@@ -318,11 +318,23 @@ item的值为0，1，2，3
     "data": null
 }
 ```
-##### 20 获取一张图片
+##### 20 用户申请加入活动
 ```
-《暂时不可用》
-POST /api/uploadImg
+POST /api/userApplyActivity
 需要的数据
-accout、item
-ps：返回值为BufferImage
+accout、activity_id
+```
+##### 21 查看用户正在进行的活动
+```
+POST /api/userAttendActivity
+需要的数据
+activity_id
+```
+##### 22 查看用户参加过的活动
+```
+POST /api/getRecord
+需要的数据
+account
+返回的数据
+
 ```

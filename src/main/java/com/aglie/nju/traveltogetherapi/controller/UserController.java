@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aglie.nju.traveltogetherapi.mapper.RecordMapper;
 import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
+import com.aglie.nju.traveltogetherapi.model.RecordInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
 import com.aglie.nju.traveltogetherapi.model.UserInfo;
 import com.aglie.nju.traveltogetherapi.util.FileTools;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RecordMapper recordMapper;
 
     /**
      * 用户在无Token情况下登录
@@ -89,12 +94,39 @@ public class UserController {
     public ResultModel updateUser(UserInfo user){
         try {
             if (user.getName() == null || user.getGender() == null || user.getAge() == null ||
-            user.getCity() == null || user.getCode() == null || user.getPasswd() == null || user.getAccount() == null){
+                user.getCity() == null || user.getCode() == null || user.getPasswd() == null ||
+                    user.getAccount() == null || user.getSchool() == null){
                 return  ResultTools.result(1001, "", null);
             }
             int code = userMapper.updateUser(user);
             System.out.println(code);
             if(code == 1){
+                return ResultTools.result(0, "success", null);
+            }
+            return ResultTools.result(404,"failed", null);
+        }catch (Exception e){
+            return ResultTools.result(404, e.getMessage(), null);
+        }
+    }
+
+    /**
+     * 用户申请参加活动
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = {"/userApplyActivity"}, method = RequestMethod.GET)
+    public ResultModel userAttendActivity(UserInfo user){
+        try {
+            if (user.getAccount() ==null || user.getActivity_id() == null){
+                return  ResultTools.result(1001, "", null);
+            }
+            int code = userMapper.userAttendActivity(user);
+            System.out.println(code);
+            if(code == 1){
+                RecordInfo recordInfo = new RecordInfo();
+                recordInfo.setAccount(user.getAccount());
+                recordInfo.setAid(user.getActivity_id());
+                recordMapper.insertUserRecords(recordInfo);
                 return ResultTools.result(0, "success", null);
             }
             return ResultTools.result(404,"failed", null);
