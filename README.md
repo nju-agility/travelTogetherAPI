@@ -206,7 +206,7 @@ GET /api/toPublishedActivities
 ```
 GET /api/addActivity
 需要的数据
-owner,city,location,title,details,time_start,time_end,type
+owner,city,location,title,details,time_start,time_end,type,price
 ps：time_start、time_end格式为2019-01-01
 ```
 ##### 12 登录(本地存在Token的情况)

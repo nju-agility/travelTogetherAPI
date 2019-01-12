@@ -10,8 +10,8 @@ public class CkeckParameter {
         if (activity.getOwner() == null || activity.getType() == null ||
                 activity.getCity() == null || activity.getLocation() == null ||
                 activity.getTitle() == null || activity.getDetails() == null ||
-                activity.getTime_start() == null || activity.getTime_end() == null
-                ){
+                activity.getTime_start() == null || activity.getTime_end() == null ||
+                activity.getPrice() == null){
             return false;
         }
         return true;

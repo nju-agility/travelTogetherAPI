@@ -111,4 +111,12 @@ public class ActivityInfo {
     public void setNum_of_score(Integer num_of_score) {
         this.num_of_score = num_of_score;
     }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 }
