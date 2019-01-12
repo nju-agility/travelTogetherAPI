@@ -7,6 +7,7 @@ import java.util.Map;
 import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
 import com.aglie.nju.traveltogetherapi.model.UserInfo;
+import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -45,6 +46,7 @@ public class UserController {
                 map.put("account",user.getAccount());
                 map.put("name",user.getName());
                 map.put("token",jwtToken);
+                map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);
             }else{
@@ -119,6 +121,7 @@ public class UserController {
             Map<String, Object> map = new HashMap<String, Object>();
             user.setPasswd("****");
             map.put("content", user);
+            map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
             return ResultTools.result(0, "", map);
         } catch (Exception e) {
             return ResultTools.result(404, e.getMessage(), null);

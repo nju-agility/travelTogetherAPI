@@ -2,9 +2,15 @@ package com.aglie.nju.traveltogetherapi.util;
 
 import com.aglie.nju.traveltogetherapi.model.ImagePath;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileTools {
     /**
@@ -21,19 +27,19 @@ public class FileTools {
      */
     public static ImagePath imgPath(ImagePath img, String account, String suffixName){
         if(img.getItem()==0){
-            String path = "travelPic/headPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==1){
-            String path = "travelPic/codePic/" + account + suffixName; // 新文件名
+            String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==2){
-            String path = "travelPic/commentPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else if(img.getItem()==3){
-            String path = "travelPic/activityPic/" + account + suffixName; // 新文件名
+            String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
         }else{
@@ -65,5 +71,49 @@ public class FileTools {
             }
         }
         return files;
+    }
+
+    public static String getImg(String account,Integer item){
+        String filePath = "./travelPic/";
+        if(item == 0){
+            ArrayList<String> files = FileTools.getFiles(filePath);
+            for (int i = 0;i<files.size();i++){
+                if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("0_"+account)){
+                    System.out.println(files.get(i));
+                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+                    return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
+                }
+            }
+            return "Dont't find image!";
+        }else if(item == 1){
+            ArrayList<String> files = FileTools.getFiles(filePath);
+            for (int i = 0;i<files.size();i++){
+                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("1_"+account)){
+                    System.out.println(files.get(i));
+                    return files.get(i);
+                    }
+            }
+            return "Dont't find image!";
+        }else if (item == 2){
+            ArrayList<String> files = FileTools.getFiles(filePath);
+            for (int i = 0;i<files.size();i++){
+                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("2_"+account)){
+                    System.out.println(files.get(i));
+                    return files.get(i);
+                }
+            }
+            return "Dont't find image!";
+        }else if (item == 3){
+            ArrayList<String> files = FileTools.getFiles(filePath);
+            for (int i = 0;i<files.size();i++){
+                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("3_"+account)){
+                    System.out.println(files.get(i));
+                    return files.get(i);
+                }
+            }
+            return "Dont't find image!";
+        }else {
+            return "Item error!";
+        }
     }
 }
