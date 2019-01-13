@@ -79,6 +79,10 @@ public class FileTools {
 
     public static String getImg(String account,Integer item){
         String filePath = "./travelPic/";
+        if (account.startsWith("\"") && account.endsWith("\"")){
+            account = account.substring(1,account.length()-1);
+            System.out.println(account);
+        }
         if(item == 0){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
