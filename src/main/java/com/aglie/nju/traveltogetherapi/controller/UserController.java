@@ -191,7 +191,8 @@ public class UserController {
             }
             Map<String, Object> map = new HashMap<String, Object>();
 //            user.setPasswd("****");
-            user.setHeadURL("/image/" + FileTools.getImg(user.getAccount(),0));
+//            user.setHeadURL("/image/" + FileTools.getImg(user.getAccount(),0));
+            user.setHeadURL("/image/"+user.getAccount()+".jpg");
             map.put("content", user);
             return ResultTools.result(0, "", map);
         } catch (Exception e) {
