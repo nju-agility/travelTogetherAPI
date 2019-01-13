@@ -51,7 +51,8 @@ public class UserController {
                 map.put("account",user.getAccount());
                 map.put("name",user.getName());
                 map.put("token",jwtToken);
-                map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
+//                map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
+                user.setHeadURL("/image/0_"+user.getAccount()+".jpg");
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);
             }else{
@@ -192,7 +193,7 @@ public class UserController {
             Map<String, Object> map = new HashMap<String, Object>();
 //            user.setPasswd("****");
 //            user.setHeadURL("/image/" + FileTools.getImg(user.getAccount(),0));
-            user.setHeadURL("/image/"+user.getAccount()+".jpg");
+            user.setHeadURL("/image/0_"+user.getAccount()+".jpg");
             map.put("content", user);
             return ResultTools.result(0, "", map);
         } catch (Exception e) {
