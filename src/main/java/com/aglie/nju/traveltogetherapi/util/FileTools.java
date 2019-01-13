@@ -90,6 +90,8 @@ public class FileTools {
                     System.out.println(files.get(i));
                     System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
+                }else {
+                    System.out.println(files.get(i).lastIndexOf('\\')+1);
                 }
             }
             return "default.jpg";
