@@ -27,6 +27,10 @@ public class FileTools {
      */
     public static ImagePath imgPath(ImagePath img, String account, String suffixName){
         if(img.getItem()==0){
+            if (account.startsWith("\"") && account.endsWith("\"")){
+                account = account.substring(1,account.length()-1);
+                System.out.println(account);
+            }
             String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
             img.setPath(path);
             return img;
