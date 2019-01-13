@@ -6,6 +6,7 @@ import com.aglie.nju.traveltogetherapi.mapper.RecordMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
 import com.aglie.nju.traveltogetherapi.model.RecordInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
+import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,13 @@ public class RecordController {
                 return ResultTools.result(1001,"",null);
             }
             List<RecordInfo> records = recordMapper.selectUserRecords(account);
-            List<ActivityInfo> activities = new ArrayList<ActivityInfo>();
+            List<ActivityInfo> activities = new ArrayList<>();
             for (RecordInfo record : records){
-                activities.add(activityMapper.selectAttendedActivity(record.getAid()));
+                ActivityInfo activityInfo = activityMapper.selectAttendedActivity(record.getAid());
+                activityInfo.setActivityURL("/image/" + FileTools.getImg(activityInfo.getAid().toString(),3));
+                if(activityInfo != null){
+                    activities.add(activityInfo);
+                }
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);

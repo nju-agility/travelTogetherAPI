@@ -320,25 +320,25 @@ item的值为0，1，2，3
 ```
 ##### 20 用户申请加入活动
 ```
-POST /api/userApplyActivity
+GET /api/userApplyActivity
 需要的数据
 accout、activity_id
 ```
 ##### 21 查看用户正在进行的活动
 ```
-POST /api/userAttendActivity
+GET /api/userAttendActivity
 需要的数据
 activity_id
 ```
 ##### 22 查看用户参加过的活动
 ```
-POST /api/getRecord
+GET /api/getRecord
 需要的数据
 account
 ```
 ##### 23 用户退出活动
 ```
-POST /api/userQuitActivity
+GET /api/userQuitActivity
 需要的数据
 account
 ```

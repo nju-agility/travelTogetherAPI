@@ -88,30 +88,33 @@ public class FileTools {
         }else if(item == 1){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
-                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("1_"+account)){
+                if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("1_"+account)){
                     System.out.println(files.get(i));
-                    return files.get(i);
-                    }
+                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+                    return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
+                }
             }
             return "Dont't find image!";
         }else if (item == 2){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
-                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("2_"+account)){
+                if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("2_"+account)){
                     System.out.println(files.get(i));
-                    return files.get(i);
+                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+                    return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }
             return "Dont't find image!";
         }else if (item == 3){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
-                if (files.get(i).substring(0, files.get(i).lastIndexOf('.')).equals("3_"+account)){
+                if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("3_"+account)){
                     System.out.println(files.get(i));
-                    return files.get(i);
+                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+                    return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }
-            return "Dont't find image!";
+            return "activity_default.jpg";
         }else {
             return "Item error!";
         }

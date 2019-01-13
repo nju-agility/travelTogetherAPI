@@ -30,7 +30,7 @@ public interface ActivityMapper {
     public List<ActivityInfo> selectUserAttendActivity(Integer activity_id);
 
     /*******查询某用户参加过的活动********/
-    @Select("select * from activities where status = 5 and aid = #{activity_id}")
+    @Select("select * from activities where status in (0,1,3,4,5) and aid = #{activity_id}")
     public ActivityInfo selectAttendedActivity(Integer activity_id);
 
     /*******查询所有已验证发布的活动********/

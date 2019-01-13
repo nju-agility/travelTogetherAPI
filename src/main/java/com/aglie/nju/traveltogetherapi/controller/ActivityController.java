@@ -5,6 +5,7 @@ import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
 import com.aglie.nju.traveltogetherapi.model.UserInfo;
+import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import com.aglie.nju.traveltogetherapi.util.CkeckParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,10 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectUserCreatedActivities(owner);
-            Map<String, Object> map = new HashMap<String, Object>();
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
+            Map<String, Object> map = new HashMap<>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
         }catch (Exception e){
@@ -48,6 +53,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectUserFinishedActivities(owner);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -64,6 +72,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectUserPublishedActivities(owner);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -80,6 +91,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectUserRepealActivities(owner);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -96,6 +110,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectUserAttendActivity(activity_id);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -109,8 +126,13 @@ public class ActivityController {
     public ResultModel selectPublishedActivities(){
         try{
             List<ActivityInfo> activities = activityMapper.selectPublishedActivities();
+            List<ActivityInfo> acs = new ArrayList<ActivityInfo>();
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                acs.add(activity);
+            }
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("content", activities);
+            map.put("content", acs);
             return ResultTools.result(0,"",map);
         }catch (Exception e){
             return ResultTools.result(404, e.getMessage(),null);
@@ -125,6 +147,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectTypeActivities(type);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -141,6 +166,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectCityActivities(city);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -149,7 +177,7 @@ public class ActivityController {
         }
     }
 
-    //按城市查询可参加的所有活动
+    //按城市查询某种可参加的所有活动
     @RequestMapping(value = {"/cityAndTypeActivities"}, method = RequestMethod.GET)
     public ResultModel selectCityActivities(String city, String type){
         try{
@@ -157,6 +185,9 @@ public class ActivityController {
                 return ResultTools.result(1001,"",null);
             }
             List<ActivityInfo> activities = activityMapper.selectCityAndTypeActivities(city,type);
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);
@@ -170,6 +201,9 @@ public class ActivityController {
     public ResultModel selectToPublishedActivities(){
         try{
             List<ActivityInfo> activities = activityMapper.selectToPublishedActivities();
+            for (ActivityInfo activity : activities){
+                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
             return ResultTools.result(0,"",map);

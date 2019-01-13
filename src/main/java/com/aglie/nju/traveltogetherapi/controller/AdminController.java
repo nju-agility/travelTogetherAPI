@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,7 +55,7 @@ public class AdminController {
      * @param activity
      * @return
      */
-    @RequestMapping(value = {"/checkActivity"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/checkActivity"}, method = RequestMethod.GET)
     public ResultModel checkActivity(ActivityInfo activity){
         try {
             if (activity.getAid() == null || activity.getStatus() == null){
@@ -74,7 +72,7 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = {"/checkActivities"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/checkActivities"}, method = RequestMethod.GET)
     public ResultModel checkActivity(@RequestBody ArrayList<ActivityInfo> activities){
         try {
             ActivityInfo activity = null;
