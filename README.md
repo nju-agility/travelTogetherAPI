@@ -204,7 +204,7 @@ GET /api/toPublishedActivities
 ```
 ##### 11 用户创建活动
 ```
-GET /api/addActivity
+POST /api/addActivity
 需要的数据
 owner,city,location,title,details,time_start,time_end,type,price
 ps：time_start、time_end格式为2019-01-01
@@ -279,14 +279,14 @@ accout,passwd
 ```
 ##### 17 管理员验证发布或取消一个活动
 ```
-POST /api/checkActivity
+GET /api/checkActivity
 需要的数据
 aid,status
 ps：传入的status应为1或3，1代表审核通过，3代表审核不通过
 ```
 ##### 18 管理员验证发布或取消多个活动
 ```
-POST /api/checkActivities
+GET /api/checkActivities
 需要的数据类似如下格式
 [
 	{
