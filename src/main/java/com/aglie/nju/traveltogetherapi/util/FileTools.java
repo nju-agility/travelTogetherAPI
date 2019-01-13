@@ -78,7 +78,7 @@ public class FileTools {
     }
 
     public static String getImg(String account,Integer item){
-        String filePath = "/var/lib/jenkins/workspace/travelTogether/travelPic/";
+        String filePath = "root/var/lib/jenkins/workspace/travelTogether/travelPic/";
         if (account.startsWith("\"") && account.endsWith("\"")){
             account = account.substring(1,account.length()-1);
             System.out.println(account);
