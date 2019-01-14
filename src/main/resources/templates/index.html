@@ -18,9 +18,10 @@
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
-    <!--<script type="text/javascript" href="jquery-3.3.1.js"></script>-->
-    <!--<script type="text/javascript" href="js/bootstrap.js" >    </script>-->
-
+    <!--<script type="text/javascript" href="jquery-3.3.1.js"></script> 加上type反而不能用-->
+    <!--<script type="text/javascript" href="js/bootstrap.js" ></script>-->
+    <script  src="jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.js" ></script>
     <script>
       function checklogin() {
         var email = document.getElementById("inputEmail");
@@ -34,12 +35,16 @@
         xmlhttp.send();
         xmlhttp.onreadystatechange=function () {
           if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ){
-
-            alert("请求成功");
             var data = JSON.parse(xmlhttp.responseText);
-            console.log(data);
-            if(data.resCode == 0){
+            var data2 = $.parseJSON(xmlhttp.responseText);
+
+            console.log(data2);
+            alert("请求成功");
+
+            if(data2.resCode == 0){
               location.replace("/manage");
+            }else{
+              alert("Wrong!");
             }
           }else if( xmlhttp.status == 404){
             alert("请求不成功");
