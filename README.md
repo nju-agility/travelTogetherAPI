@@ -204,9 +204,9 @@ GET /api/toPublishedActivities
 ```
 ##### 11 用户创建活动
 ```
-GET /api/addActivity
+POST /api/addActivity
 需要的数据
-owner,city,location,title,details,time_start,time_end,type
+owner,city,location,title,details,time_start,time_end,type,price
 ps：time_start、time_end格式为2019-01-01
 ```
 ##### 12 登录(本地存在Token的情况)
@@ -279,14 +279,14 @@ accout,passwd
 ```
 ##### 17 管理员验证发布或取消一个活动
 ```
-POST /api/checkActivity
+GET /api/checkActivity
 需要的数据
 aid,status
 ps：传入的status应为1或3，1代表审核通过，3代表审核不通过
 ```
 ##### 18 管理员验证发布或取消多个活动
 ```
-POST /api/checkActivities
+GET /api/checkActivities
 需要的数据类似如下格式
 [
 	{
@@ -318,11 +318,27 @@ item的值为0，1，2，3
     "data": null
 }
 ```
-##### 20 获取一张图片
+##### 20 用户申请加入活动
 ```
-《暂时不可用》
-POST /api/uploadImg
+GET /api/userApplyActivity
 需要的数据
-accout、item
-ps：返回值为BufferImage
+accout、activity_id
+```
+##### 21 查看用户正在进行的活动
+```
+GET /api/userAttendActivity
+需要的数据
+activity_id
+```
+##### 22 查看用户参加过的活动
+```
+GET /api/getRecord
+需要的数据
+account
+```
+##### 23 用户退出活动
+```
+GET /api/userQuitActivity
+需要的数据
+account
 ```

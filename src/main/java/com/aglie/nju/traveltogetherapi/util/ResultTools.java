@@ -38,7 +38,7 @@ public class ResultTools {
                 model.setResMsg("Empty content");
                 break;
             case 1003:
-                model.setResMsg("Account exists");
+                model.setResMsg("Account or activity exists");
                 break;
             case 1004:
                 model.setResMsg("Upload file is empty");

@@ -22,8 +22,16 @@ public interface ActivityMapper {
     public List<ActivityInfo> selectUserFinishedActivities(String owner);
 
     /*******查询某用户被撤销的活动********/
-    @Select("select * from activities where status = 5 and owner = #{owner}")
+    @Select("select * from activities where status = 3 and owner = #{owner}")
     public List<ActivityInfo> selectUserRepealActivities(String owner);
+
+    /*******查询某用户正在参加的活动********/
+    @Select("select * from activities where status in (4, 1) and aid = #{activity_id}")
+    public List<ActivityInfo> selectUserAttendActivity(Integer activity_id);
+
+    /*******查询某用户参加过的活动********/
+    @Select("select * from activities where status in (0,1,3,4,5) and aid = #{activity_id}")
+    public ActivityInfo selectAttendedActivity(Integer activity_id);
 
     /*******查询所有已验证发布的活动********/
     @Select("select * from activities where status = 1")
@@ -49,4 +57,8 @@ public interface ActivityMapper {
     @Insert("insert into activities(status,owner,city,location,title,details,time_start,time_end,type)" +
             " values (0,#{owner},#{city},#{location},#{title},#{details},#{time_start},#{time_end},#{type})")
     public int addActivity(ActivityInfo activity);
+
+    /*******查询用户正在创建的活动********/
+    @Select("select * from activities where owner = #{owner} and time_start = #{time_start}")
+    public ActivityInfo selectActivity(String owner, String time_start);
 }

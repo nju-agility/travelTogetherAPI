@@ -14,6 +14,8 @@ public class ActivityInfo {
     private Integer score;
     private Integer num_of_score;
     private String type;
+    private Integer price;
+    private String activityURL;
 
     public String getType() {
         return type;
@@ -109,5 +111,21 @@ public class ActivityInfo {
 
     public void setNum_of_score(Integer num_of_score) {
         this.num_of_score = num_of_score;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getActivityURL() {
+        return activityURL;
+    }
+
+    public void setActivityURL(String activityURL) {
+        this.activityURL = activityURL;
     }
 }
