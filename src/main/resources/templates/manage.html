@@ -12,17 +12,19 @@
     <script  src="jquery-3.3.1.js"></script>
     <script src="js/bootstrap.js" ></script>
     <script>
-        function judge(i,status){
+        function judge(i,status,parent){
             console.log(i,status);
             var xmlhttp = new XMLHttpRequest();
-            // xmlhttp.open("GET", "/api/checkActivity?aid="+i+"&status="+status, true);
-            // xmlhttp.send();
-            xmlhttp.open("POST", "/api/checkActivity", true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
-            xmlhttp.send("aid="+i+"&status="+status);
+            xmlhttp.open("GET", "/api/checkActivity?aid="+i+"&status="+status, true);
+            xmlhttp.send();
+            // xmlhttp.open("POST", "/api/checkActivity", true);
+            // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
+            // xmlhttp.send("aid="+i+"&status="+status);
             xmlhttp.onreadystatechange = function (ev) {
                 if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
                     console.log(xmlhttp.responseText);
+                    var bod = parent.parentElement;
+                    bod.removeChild(parent);
                 }
                 else if(xmlhttp.status ==404){
                     console.log("failed");
@@ -83,24 +85,24 @@
 
                         var button1 = document.createElement("button");
                         button1.className="btn glyphicon glyphicon-ok ";
-                        button1.style="margin-left: 900px;background-color: #4CAF50";
+                        button1.style="margin-right: 100px;background-color: #4CAF50";
                         button1.type = "button";
                         button1.id = data[i].aid;
                         button1.innerText="通过";
                         button1.onclick = function(evt){
-                            // console.log(evt.target.id);
-                            judge(evt.target.id,1);
+                            // console.log(evt.target.parentElement.parentElement);
+                            judge(evt.target.id,1,evt.target.parentElement.parentElement);
                         };
                         var button2 = document.createElement("button");
                         button2.className="btn glyphicon glyphicon-remove";
                     // #f5f5f5
-                        button2.style="margin-left: 100px;background-color: red";
+                        button2.style="margin-right: 200px;background-color: red";
                         button2.innerText="拒绝";
                         button2.type = "button";
                         button2.id = data[i].aid;
                         button2.onclick = function(evt){
                             // console.log(evt.target.id);
-                            judge(evt.target.id,3);
+                            judge(evt.target.id,3,evt.target.parentElement.parentElement);
                         };
                         console.log(button2);
                         head.appendChild(button1);
