@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/image/css/bootstrap.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
     <!-- Custom styles for this template -->
-    <link href="manage.css" rel="stylesheet">
-    <script  src="jquery-3.3.1.js"></script>
-    <script src="js/bootstrap.js" ></script>
+    <link href="/image/manage.css" rel="stylesheet">
+    <script  src="/image/jquery-3.3.1.js"></script>
+    <script src="/image/js/bootstrap.js" ></script>
     <script>
         function judge(i,status,parent){
             console.log(i,status);
@@ -74,10 +74,10 @@
                         body.appendChild(element);
                         var head = document.createElement("div");
                         head.className="panel-heading";
-                        // head.style.backgroundColor="";
                         element.appendChild(head);
                         var sp = document.createElement("span");
                         sp.innerHTML = "<font size='4'>" + data[i].aid + "    :  " + data[i].title + "</font>";
+                        sp.className="col-md-6";
 
                         // + "  at  " + data[i].city +" . "+ data[i].location
                         head.appendChild(sp);
@@ -85,7 +85,7 @@
 
                         var button1 = document.createElement("button");
                         button1.className="btn glyphicon glyphicon-ok ";
-                        button1.style="margin-right: 100px;background-color: #4CAF50";
+                        button1.style="margin-left:300px;background-color: #4CAF50";
                         button1.type = "button";
                         button1.id = data[i].aid;
                         button1.innerText="通过";
@@ -96,7 +96,7 @@
                         var button2 = document.createElement("button");
                         button2.className="btn glyphicon glyphicon-remove";
                     // #f5f5f5
-                        button2.style="margin-right: 200px;background-color: red";
+                        button2.style="margin-left:100px;background-color: red";
                         button2.innerText="拒绝";
                         button2.type = "button";
                         button2.id = data[i].aid;
