@@ -3,8 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/image/css/bootstrap.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    <!-- Custom styles for this template -->
+    <link href="/image/manage.css" rel="stylesheet">
+    <script  src="/image/jquery-3.3.1.js"></script>
+    <script src="/image/js/bootstrap.js" ></script>
+    <script>
+        function judge(i,status,parent){
+            console.log(i,status);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/api/checkActivity?aid="+i+"&status="+status, true);
+            xmlhttp.send();
+            // xmlhttp.open("POST", "/api/checkActivity", true);
+            // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
+            // xmlhttp.send("aid="+i+"&status="+status);
+            xmlhttp.onreadystatechange = function (ev) {
+                if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                    console.log(xmlhttp.responseText);
+                    var bod = parent.parentElement;
+                    bod.removeChild(parent);
+                }
+                else if(xmlhttp.status ==404){
+                    console.log("failed");
+                }
+
+            }
+
+        }
+
+        window.onload = function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET","/api/toPublishedActivities",true);
+            xmlhttp.send();
+            // var al = document.createElement("ul");
+            // var al = document.createElement("ul");
+
+            // al.className="list-group";
+            // al.id="showMe()"
+            // console.log(al);
+            var nav = document.getElementById("nav");
+            var body = document.getElementsByTagName("body")[0];
+            // console.log(nav);
+            // console.log(body);
+            // body.appendChild(al);
+            var content = document.getElementById("content");
+
+            xmlhttp.onreadystatechange=function () {
+            if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                    // alert("成功获取数据");
+                    var data = $.parseJSON(xmlhttp.responseText).data.content;
+                    console.log(data);
+                    // console.log(typeof data);
+
+                    for(var i = 0; i < data.length; i ++){
+                        // var element  =  document.createElement("li");
+                    //     element.className="list-group-item";
+                    //     element.id = data[i].aid;
+                    //     element.innerText=data[i].title;
+                    //     al.appendChild(element);
+                    //
+                    //
+                    //     console.log(element);
+                    //
+                        var element = document.createElement("div");
+                        element.className="panel panel-default";
+
+                        body.appendChild(element);
+                        var head = document.createElement("div");
+                        head.className="panel-heading";
+                        element.appendChild(head);
+                        var sp = document.createElement("span");
+                        sp.innerHTML = "<font size='4'>" + data[i].aid + "    :  " + data[i].title + "</font>";
+                        sp.className="col-md-6";
+
+                        // + "  at  " + data[i].city +" . "+ data[i].location
+                        head.appendChild(sp);
+
+
+                        var button1 = document.createElement("button");
+                        button1.className="btn glyphicon glyphicon-ok ";
+                        button1.style="margin-left:300px;background-color: #4CAF50";
+                        button1.type = "button";
+                        button1.id = data[i].aid;
+                        button1.innerText="通过";
+                        button1.onclick = function(evt){
+                            // console.log(evt.target.parentElement.parentElement);
+                            judge(evt.target.id,1,evt.target.parentElement.parentElement);
+                        };
+                        var button2 = document.createElement("button");
+                        button2.className="btn glyphicon glyphicon-remove";
+                    // #f5f5f5
+                        button2.style="margin-left:100px;background-color: red";
+                        button2.innerText="拒绝";
+                        button2.type = "button";
+                        button2.id = data[i].aid;
+                        button2.onclick = function(evt){
+                            // console.log(evt.target.id);
+                            judge(evt.target.id,3,evt.target.parentElement.parentElement);
+                        };
+                        console.log(button2);
+                        head.appendChild(button1);
+                        head.appendChild(button2);
+                        var bod = document.createElement("div");
+                        var sp2 = document.createElement("span");
+                        sp2.innerHTML = "<p><font size=3>" + data[i].city +"  "+ data[i].location+ "</font></p>";
+                        bod.className="panel-body";
+                        element.append(bod);
+                        bod.appendChild(sp2);
+                        var sp4 = document.createElement("span");
+                        sp4.innerHTML = "<p><font size=2>" +data[i].time_start + " -- "+ data[i].time_end + "</font></p>"
+                        bod.appendChild(sp4);
+                        var sp3 = document.createElement("span");
+                        sp3.innerHTML = "<p><font size=2>" +data[i].details + "</font></p>";
+                        // bod.innerText = data[i].details;
+                        bod.appendChild(sp3);
+
+            // <button class="btn" style="margin-left: 900px;background-color: #f5f5f5">通过</button>
+                    }
+                }else if (xmlhttp.status == 404) {
+                    alert("获取数据失败");
+                }
+            }
+
+
+        }
+
+    </script>
+
+    <script>
+        $('.list-group').click(function () {
+            alert("dianle")
+        })
+
+    </script>
 </head>
 <body>
-<p> just so</p>
+
+<nav class="navbar navbar-default" role="navigation" id="nav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Travel</a>
+        </div>
+        <div >
+            <!--<ul class = "nav navbar-nav">-->
+            <!--<li class="active">-->
+            <!--<button id="viewAll" onclick="viewAll"> 查看所有申请的活动</button>-->
+            <!--&lt;!&ndash;<a href="/">查看所有在申请的活动</a>&ndash;&gt;-->
+            <!--</li>-->
+
+            <!--</ul>-->
+            <!--<div class="btn-group" role="group" aria-label="...">-->
+            <!--<button type="button" class="btn btn-default">Left</button>-->
+            <!--<button type="button" class="btn btn-default">Middle</button>-->
+            <!--<button type="button" class="btn btn-default">Right</button>-->
+            <!--</div>-->
+
+        </div>
+
+    </div>
+
+
+</nav>
+<!--<div class="list-group">-->
+    <!--<a href="#" class="list-group-item active">-->
+        <!--Cras justo odio-->
+    <!--</a>-->
+    <!--<a href="#" class="list-group-item">Dapibus ac facilisis in</a>-->
+    <!--<a href="#" class="list-group-item">Morbi leo risus</a>-->
+    <!--<a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
+    <!--<a href="#" class="list-group-item">Vestibulum at eros</a>-->
+<!--</div>-->
+
+<!--<div class=".container">-->
+    <!--<ul class="list-group" id="showMe()">-->
+        <!--<div class="row">-->
+
+        <!--<li class="list-group-item ">-->
+
+            <!--<button class="col-md-8 btn btn-default">d</button>-->
+            <!--<button class="col-md-2 btn btn-default">d</button>-->
+            <!--<button class="col-md-2 btn btn-default">d</button>-->
+
+        <!--</li>-->
+        <!--</div>-->
+        <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+        <!--<li class="list-group-item">Morbi leo risus</li>-->
+        <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+        <!--<li class="list-group-item">Vestibulum at eros</li>-->
+    <!--</ul>-->
+
+<!--</div>-->
+<div class=".container" id="content">
+
+</div>
+
 </body>
-</html>
+</html>  
