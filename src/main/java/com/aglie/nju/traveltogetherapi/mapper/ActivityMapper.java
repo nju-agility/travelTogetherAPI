@@ -54,8 +54,8 @@ public interface ActivityMapper {
     public List<ActivityInfo> selectToPublishedActivities();
 
     /*******用户创建活动********/
-    @Insert("insert into activities(status,owner,city,location,title,details,time_start,time_end,type)" +
-            " values (0,#{owner},#{city},#{location},#{title},#{details},#{time_start},#{time_end},#{type})")
+    @Insert("insert into activities(status,owner,city,location,title,details,time_start,time_end,type,price)" +
+            " values (0,#{owner},#{city},#{location},#{title},#{details},#{time_start},#{time_end},#{type},#{price})")
     public int addActivity(ActivityInfo activity);
 
     /*******查询用户正在创建的活动********/
