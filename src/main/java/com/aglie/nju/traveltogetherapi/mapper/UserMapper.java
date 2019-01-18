@@ -26,6 +26,10 @@ public interface UserMapper {
     @Update("update users set name=#{name},gender=#{gender},age=#{age},city=#{city},code=#{code},passwd=#{passwd} where account=#{account}")
     public int updateUser(UserInfo user);
 
+    /*******修改已有用户正在进行的活动信息********/
+    @Update("update users set activity_id=#{activity_id} where account=#{account}")
+    public int updateUserActivity(UserInfo user);
+
     /*******用户请求参加活动********/
     @Update("update users set activity_id=#{activity_id} where account=#{account}")
     public int userAttendActivity(UserInfo user);

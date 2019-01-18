@@ -1,8 +1,10 @@
 package com.aglie.nju.traveltogetherapi.controller;
 
 import com.aglie.nju.traveltogetherapi.mapper.ActivityMapper;
+import com.aglie.nju.traveltogetherapi.mapper.RecordMapper;
 import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
+import com.aglie.nju.traveltogetherapi.model.RecordInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
 import com.aglie.nju.traveltogetherapi.model.UserInfo;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
@@ -24,6 +26,8 @@ public class ActivityController {
     private ActivityMapper activityMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RecordMapper recordMapper;
 
     //查询某用户刚创建待审核的活动
     @RequestMapping(value = {"/userCreatedActivities"}, method = RequestMethod.GET)
@@ -238,7 +242,15 @@ public class ActivityController {
                 System.out.println(activityInfo.getAid());
                 UserInfo user = userMapper.selectUserByAccount(activityInfo.getOwner());
                 user.setActivity_id(activityInfo.getAid());
-                userMapper.updateUser(user);
+                System.out.println(user.getActivity_id());
+                int res = userMapper.updateUserActivity(user);
+                System.out.println(res);
+                if(res == 1){
+                    RecordInfo recordInfo = new RecordInfo();
+                    recordInfo.setAccount(user.getAccount());
+                    recordInfo.setAid(user.getActivity_id());
+                    recordMapper.insertUserRecords(recordInfo);
+                }
                 List<ActivityInfo> activities = activityMapper.selectUserCreatedActivities(activity.getOwner());
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("content", activities);

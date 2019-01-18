@@ -6,7 +6,6 @@ import com.aglie.nju.traveltogetherapi.mapper.RecordMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
 import com.aglie.nju.traveltogetherapi.model.RecordInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
-import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

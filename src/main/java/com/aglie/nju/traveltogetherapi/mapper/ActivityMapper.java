@@ -26,7 +26,7 @@ public interface ActivityMapper {
     public List<ActivityInfo> selectUserRepealActivities(String owner);
 
     /*******查询某用户正在参加的活动********/
-    @Select("select * from activities where status in (4, 1) and aid = #{activity_id}")
+    @Select("select * from activities where status in (4, 1, 0) and aid = #{activity_id}")
     public List<ActivityInfo> selectUserAttendActivity(Integer activity_id);
 
     /*******查询某用户参加过的活动********/
