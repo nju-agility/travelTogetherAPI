@@ -35,7 +35,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectUserCreatedActivities(owner);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
             }
             Map<String, Object> map = new HashMap<>();
             map.put("content", activities);
@@ -54,7 +55,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectUserFinishedActivities(owner);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -73,7 +75,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectUserPublishedActivities(owner);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -92,7 +95,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectUserRepealActivities(owner);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -111,7 +115,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectUserAttendActivity(activity_id);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -128,7 +133,8 @@ public class ActivityController {
             List<ActivityInfo> activities = activityMapper.selectPublishedActivities();
             List<ActivityInfo> acs = new ArrayList<ActivityInfo>();
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
                 acs.add(activity);
             }
             Map<String, Object> map = new HashMap<String, Object>();
@@ -148,7 +154,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectTypeActivities(type);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -167,7 +174,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectCityActivities(city);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -186,7 +194,8 @@ public class ActivityController {
             }
             List<ActivityInfo> activities = activityMapper.selectCityAndTypeActivities(city,type);
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);
@@ -202,7 +211,8 @@ public class ActivityController {
         try{
             List<ActivityInfo> activities = activityMapper.selectToPublishedActivities();
             for (ActivityInfo activity : activities){
-                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+//                activity.setActivityURL("/image/" + FileTools.getImg(activity.getAid().toString(),3));
+                activity.setActivityURL("/image/3_"+activity.getAid().toString()+".jpg");
             }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", activities);

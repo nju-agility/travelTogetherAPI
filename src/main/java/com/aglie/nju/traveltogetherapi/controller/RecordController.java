@@ -37,7 +37,8 @@ public class RecordController {
             List<ActivityInfo> activities = new ArrayList<>();
             for (RecordInfo record : records){
                 ActivityInfo activityInfo = activityMapper.selectAttendedActivity(record.getAid());
-                activityInfo.setActivityURL("/image/" + FileTools.getImg(activityInfo.getAid().toString(),3));
+                activityInfo.setActivityURL("/image/3_"+activityInfo.getAid().toString()+".jpg");
+//                activityInfo.setActivityURL("/image/" + FileTools.getImg(activityInfo.getAid().toString(),3));
                 if(activityInfo != null){
                     activities.add(activityInfo);
                 }
