@@ -5,7 +5,6 @@ import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
 import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
 import com.aglie.nju.traveltogetherapi.model.UserInfo;
-import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
 import com.aglie.nju.traveltogetherapi.util.CkeckParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -240,7 +239,10 @@ public class ActivityController {
                 UserInfo user = userMapper.selectUserByAccount(activityInfo.getOwner());
                 user.setActivity_id(activityInfo.getAid());
                 userMapper.updateUser(user);
-                return ResultTools.result(0, "", null);
+                List<ActivityInfo> activities = activityMapper.selectUserCreatedActivities(activity.getOwner());
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("content", activities);
+                return ResultTools.result(0, "", map);
             }
             return ResultTools.result(404, "failed", null);
         }catch (Exception e){
