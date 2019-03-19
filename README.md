@@ -342,3 +342,9 @@ GET /api/userQuitActivity
 需要的数据
 account
 ```
+##### 24 初始化密码
+```
+GET /api/resetPassword
+需要的数据
+account
+```
