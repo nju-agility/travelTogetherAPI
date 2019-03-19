@@ -348,3 +348,14 @@ GET /api/resetPassword
 需要的数据
 account
 ```
+##### 25 管理员查看用户信息
+```
+GET /api/queryStudent
+```
+##### 26 管理员审核学生身份
+```
+GET /api/verifyStudent
+需要的数据
+accout、status
+```
+
