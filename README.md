@@ -375,3 +375,10 @@ GET /api/queryUserTravelNote
 account
 ```
 
+##### 30 管理员创建活动
+```
+POST /api/adminAddActivity
+需要的数据
+owner,city,location,title,details,time_start,time_end,type,price
+ps：time_start、time_end格式为2019-01-01
+```
