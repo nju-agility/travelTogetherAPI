@@ -51,6 +51,10 @@ public class TravelNoteController {
     public ResultModel queryAllTravelNote(){
         try {
             List<TravelNoteInfo> noteInfos = travelNoteMapper.selectAllTravelNote();
+            for(TravelNoteInfo noteInfo:noteInfos){
+                noteInfo.setImgPath("/image/2_"+noteInfo.getId() +".jpg");
+
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", noteInfos);
             return ResultTools.result(0, "", map);
@@ -63,6 +67,10 @@ public class TravelNoteController {
     public ResultModel queryUserTravelNote(String account){
         try {
             List<TravelNoteInfo> noteInfos = travelNoteMapper.selectTravelNote(account);
+            for(TravelNoteInfo noteInfo:noteInfos){
+                noteInfo.setImgPath("/image/2_"+noteInfo.getId() +".jpg");
+
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", noteInfos);
             return ResultTools.result(0, "", map);
