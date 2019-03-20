@@ -7,13 +7,10 @@ import com.aglie.nju.traveltogetherapi.model.ActivityInfo;
  */
 public class CkeckParameter {
     public static Boolean checkActivity(ActivityInfo activity){
-        if (activity.getOwner() == null || activity.getType() == null ||
-                activity.getCity() == null || activity.getLocation() == null ||
-                activity.getTitle() == null || activity.getDetails() == null ||
-                activity.getTime_start() == null || activity.getTime_end() == null ||
-                activity.getPrice() == null){
-            return false;
-        }
-        return true;
+        return activity.getOwner() != null && activity.getType() != null &&
+                activity.getCity() != null && activity.getLocation() != null &&
+                activity.getTitle() != null && activity.getDetails() != null &&
+                activity.getTime_start() != null && activity.getTime_end() != null &&
+                activity.getPrice() != null;
     }
 }

@@ -2,15 +2,10 @@ package com.aglie.nju.traveltogetherapi.util;
 
 import com.aglie.nju.traveltogetherapi.model.ImagePath;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FileTools {
     /**
@@ -20,15 +15,16 @@ public class FileTools {
      * 1---------身份证
      * 2---------评论图片
      * 3---------活动图片
-     * @param img
+     * @param imagePath
      * @param account
      * @param suffixName
      * @return
      */
-    public static ImagePath imgPath(ImagePath img, String account, String suffixName){
+    public static ImagePath imgPath(ImagePath imagePath, String account, String suffixName){
+        ImagePath img = imagePath;
         if (account.startsWith("\"") && account.endsWith("\"")){
             account = account.substring(1,account.length()-1);
-            System.out.println(account);
+//            System.out.println(account);
         }
         if(img.getItem()==0){
             String path = "travelPic/" + img.getItem() + "_" + account + suffixName; // 新文件名
@@ -53,13 +49,21 @@ public class FileTools {
 
     public static void uploadFile(byte[] file, String fileName) throws Exception {
         File imgFile = new File(fileName);
-        FileOutputStream out = new FileOutputStream(imgFile);
-        if (!imgFile.getParentFile().exists()) {
-            imgFile.getParentFile().mkdirs();
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(imgFile);
+            if (!imgFile.getParentFile().exists()) {
+                imgFile.getParentFile().mkdirs();
+            }
+            out.write(file);
+            out.flush();
+        }catch (Exception e){
+
+
+        }finally {
+            out.close();
+
         }
-        out.write(file);
-        out.flush();
-        out.close();
     }
 
     public static ArrayList<String> getFiles(String path) {
@@ -81,17 +85,17 @@ public class FileTools {
         String filePath = "travelPic/";
         if (account.startsWith("\"") && account.endsWith("\"")){
             account = account.substring(1,account.length()-1);
-            System.out.println(account);
+//            System.out.println(account);
         }
         if(item == 0){
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
                 if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("0_"+account)){
-                    System.out.println(files.get(i));
-                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+//                    System.out.println(files.get(i));
+//                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }else {
-                    System.out.println(files.get(i).lastIndexOf('\\')+1);
+//                    System.out.println(files.get(i).lastIndexOf('\\')+1);
                 }
             }
             return "default.jpg";
@@ -99,8 +103,8 @@ public class FileTools {
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
                 if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("1_"+account)){
-                    System.out.println(files.get(i));
-                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+//                    System.out.println(files.get(i));
+//                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }
@@ -109,8 +113,8 @@ public class FileTools {
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
                 if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("2_"+account)){
-                    System.out.println(files.get(i));
-                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+//                    System.out.println(files.get(i));
+//                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }
@@ -119,8 +123,8 @@ public class FileTools {
             ArrayList<String> files = FileTools.getFiles(filePath);
             for (int i = 0;i<files.size();i++){
                 if (files.get(i).substring(files.get(i).lastIndexOf('\\')+1, files.get(i).lastIndexOf('.')).equals("3_"+account)){
-                    System.out.println(files.get(i));
-                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
+//                    System.out.println(files.get(i));
+//                    System.out.println(files.get(i).substring(files.get(i).lastIndexOf('\\')+1));
                     return files.get(i).substring(files.get(i).lastIndexOf('\\')+1);
                 }
             }

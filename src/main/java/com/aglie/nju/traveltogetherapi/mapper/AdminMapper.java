@@ -11,9 +11,9 @@ import org.apache.ibatis.annotations.Update;
 public interface AdminMapper {
     /*******根据account查询符合管理员********/
     @Select("select * from admins where account = #{account}")
-    public AdminInfo selectAdminByAccount(String account);
+    AdminInfo selectAdminByAccount(String account);
 
     /*******管理员验证活动********/
     @Update("update activities set status=#{status} where aid=#{aid}")
-    public int checkActivity(ActivityInfo activity);
+    int checkActivity(ActivityInfo activity);
 }

@@ -8,34 +8,34 @@ import com.aglie.nju.traveltogetherapi.model.UserInfo;
 public interface UserMapper {
     /*******查询所有用户数据********/
     @Select("select * from users")
-    public List<UserInfo> selectUserByAll();
+    List<UserInfo> selectUserByAll();
 
     /*******根据account查询符合用户********/
     @Select("select * from users where account = #{account}")
-    public UserInfo selectUserByAccount(String account);
+    UserInfo selectUserByAccount(String account);
 
     /*******根据name查询符合用户********/
     @Select("select * from users where name=#{name}")
-    public List<UserInfo> selectUserByName(String name);
+    List<UserInfo> selectUserByName(String name);
 
     /*******添加新用户********/
     @Insert("insert into users(account,name,passwd) values (#{account},#{name},#{passwd})")
-    public int addUser(UserInfo user);
+    int addUser(UserInfo user);
 
     /*******修改已有用户信息********/
     @Update("update users set name=#{name},gender=#{gender},age=#{age},city=#{city},code=#{code},passwd=#{passwd} where account=#{account}")
-    public int updateUser(UserInfo user);
+    int updateUser(UserInfo user);
 
     /*******修改已有用户正在进行的活动信息********/
     @Update("update users set activity_id=#{activity_id} where account=#{account}")
-    public int updateUserActivity(UserInfo user);
+    int updateUserActivity(UserInfo user);
 
     /*******用户请求参加活动********/
     @Update("update users set activity_id=#{activity_id} where account=#{account}")
-    public int userAttendActivity(UserInfo user);
+    int userAttendActivity(UserInfo user);
 
     /*******用户退出活动********/
     @Update("update users set activity_id=#{activity_id} where account=#{account}")
-    public int userQuitActivity(UserInfo user);
+    int userQuitActivity(UserInfo user);
 
 }

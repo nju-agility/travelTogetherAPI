@@ -28,13 +28,13 @@ public class AdminController {
     @RequestMapping(value = {"/adminLogin"}, method = RequestMethod.GET)
     public ResultModel selectAdminByAccount(String account, String passwd) {
 
-        System.out.println("acc:"+account+",pass:"+passwd);
+//        System.out.println("acc:"+account+",pass:"+passwd);
         try{
             if(account == null || passwd == null){
                 return ResultTools.result(1001, "", null);
             }
             AdminInfo adminInfo = adminMapper.selectAdminByAccount(account);
-            System.out.println("adminInfo:"+adminInfo.getAccount()+","+adminInfo.getPasswd());
+//            System.out.println("adminInfo:"+adminInfo.getAccount()+","+adminInfo.getPasswd());
             if(adminInfo == null){
                 return ResultTools.result(1002, "", null);
             }
@@ -62,7 +62,7 @@ public class AdminController {
                 return  ResultTools.result(1001, "", null);
             }
             int code = adminMapper.checkActivity(activity);
-            System.out.println(code);
+//            System.out.println(code);
             if(code == 1){
                 return ResultTools.result(0, "success", null);
             }
@@ -77,7 +77,7 @@ public class AdminController {
         try {
             ActivityInfo activity = null;
             for (int i = 0; i < activities.size(); i++){
-                System.out.println("活动"+i);
+//                System.out.println("活动"+i);
                 Map<String, Object> map = new HashMap<String, Object>();
                 activity = activities.get(i);
                 if (activity.getAid() == null || activity.getStatus() == null){
@@ -85,12 +85,12 @@ public class AdminController {
                     return  ResultTools.result(1001, "", map);
                 }
                 int code = adminMapper.checkActivity(activity);
-                System.out.println(code);
+//                System.out.println(code);
                 if(code != 1){
                     map.put("content",i+1+"个活动");
                     return ResultTools.result(404, "failed", map);
                 }else{
-                    System.out.println("活动"+i+"成功");
+//                    System.out.println("活动"+i+"成功");
                 }
             }
             return ResultTools.result(0,"success", null);
