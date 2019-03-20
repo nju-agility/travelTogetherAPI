@@ -53,6 +53,7 @@ public class UserController {
                 map.put("token",jwtToken);
 //                map.put("headURL","/image/" + FileTools.getImg(user.getAccount(),0));
                 user.setHeadURL("/image/0_"+user.getAccount()+".jpg");
+                user.setStudentPicURL("/image/1_"+user.getAccount()+".jpg");
 //                map.put("content", user);
                 return ResultTools.result(0, "", map);
             }else{
@@ -194,6 +195,7 @@ public class UserController {
 //            user.setPasswd("****");
 //            user.setHeadURL("/image/" + FileTools.getImg(user.getAccount(),0));
             user.setHeadURL("/image/0_"+user.getAccount()+".jpg");
+            user.setStudentPicURL("/image/1_"+user.getAccount()+".jpg");
             map.put("content", user);
             return ResultTools.result(0, "", map);
         } catch (Exception e) {

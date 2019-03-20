@@ -15,6 +15,7 @@ public class UserInfo {
     private Integer score;
     private String school;
     private String headURL;
+    private String studentPicURL;
 
     public String getAccount() {
         return account;
@@ -126,5 +127,12 @@ public class UserInfo {
 
     public void setHeadURL(String headURL){
         this.headURL = headURL;
+    }
+
+    public String getStudentPicURL(){
+        return studentPicURL;
+    }
+    public void setStudentPicURL(String studentPicURL){
+        this.studentPicURL = studentPicURL;
     }
 }

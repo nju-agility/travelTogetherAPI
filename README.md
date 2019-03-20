@@ -342,3 +342,36 @@ GET /api/userQuitActivity
 需要的数据
 account
 ```
+##### 24 初始化密码
+```
+GET /api/resetPassword
+需要的数据
+account
+```
+##### 25 管理员查看用户信息
+```
+GET /api/queryStudent
+```
+##### 26 管理员审核学生身份
+```
+GET /api/verifyStudent
+需要的数据
+accout、status
+```
+##### 27 用户创建游记
+```
+GET /api/createTravelNote
+需要的数据
+account, city, location, title, details, submission_date
+```
+##### 28 查看所有用户的游记
+```
+GET /api/queryAllTravelNote
+```
+##### 29 查看某个用户的游记
+```
+GET /api/queryUserTravelNote
+需要的数据
+account
+```
+

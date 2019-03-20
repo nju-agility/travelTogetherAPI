@@ -1,9 +1,13 @@
 package com.aglie.nju.traveltogetherapi.controller;
 
+import com.aglie.nju.traveltogetherapi.mapper.UserMapper;
+import com.aglie.nju.traveltogetherapi.mapper.VerifyStudentMapper;
 import com.aglie.nju.traveltogetherapi.model.ImagePath;
 import com.aglie.nju.traveltogetherapi.model.ResultModel;
+import com.aglie.nju.traveltogetherapi.model.UserInfo;
 import com.aglie.nju.traveltogetherapi.util.FileTools;
 import com.aglie.nju.traveltogetherapi.util.ResultTools;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api")
 public class ImageController {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private VerifyStudentMapper verifyStudentMapper;
 
     /**
      * 上传图片
@@ -39,6 +49,11 @@ public class ImageController {
             FileTools.uploadFile(file.getBytes(),fileName);
         } catch (Exception e) {
             return ResultTools.result(404,e.getMessage(),null);
+        }
+        if(item == 1){
+            UserInfo user = userMapper.selectUserByAccount(account);
+            user.setStatus(1);
+            verifyStudentMapper.changeStudentStatus(user);
         }
         return ResultTools.result(0,"",null);
     }

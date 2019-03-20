@@ -56,7 +56,9 @@ public interface ActivityMapper {
     /*******用户创建活动********/
     @Insert("insert into activities(status,owner,city,location,title,details,time_start,time_end,type,price)" +
             " values (0,#{owner},#{city},#{location},#{title},#{details},#{time_start},#{time_end},#{type},#{price})")
-    int addActivity(ActivityInfo activity);
+
+    public int addActivity(ActivityInfo activity);
+
 
     /*******查询用户正在创建的活动********/
     @Select("select * from activities where owner = #{owner} and time_start = #{time_start}")
