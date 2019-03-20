@@ -27,6 +27,7 @@ public class ResetPwdController {
     public ResultModel resetPassword(String account, String name){
         try{
             if(account == null || name == null){
+                System.out.println("missing para");
                 return ResultTools.result(1001, "", null);
             }else{
                 String newPassword = RandomPassword.createRandomPassword(8);
