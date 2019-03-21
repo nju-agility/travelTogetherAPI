@@ -15,4 +15,10 @@ public class IndexController {
         return "manage.html";
     }
 
+    @RequestMapping("/verifying")
+    public String verifying() {
+        return "verifying.html";
+    }
+
+
 }
