@@ -3,12 +3,14 @@ package com.aglie.nju.traveltogetherapi.model;
 import java.util.Date;
 
 public class TravelNoteInfo {
+    private int id;
     private String account;
     private String city;
     private String location;
     private String title;
     private String details;
     private String submission_date;
+    private String imgPath;
 
     public String getAccount() {
         return account;
@@ -56,5 +58,21 @@ public class TravelNoteInfo {
 
     public void setSubmission_date(String submission_date) {
         this.submission_date = submission_date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

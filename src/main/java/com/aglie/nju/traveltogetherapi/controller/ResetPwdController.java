@@ -24,9 +24,10 @@ public class ResetPwdController {
     private RestPasswordMapper restPasswordMapper;
 
     @RequestMapping(value = {"/resetPassword"}, method = RequestMethod.GET)
-    public ResultModel resetPassword(String account){
+    public ResultModel resetPassword(String account, String name){
         try{
-            if(account == null){
+            if(account == null || name == null){
+                System.out.println("missing para");
                 return ResultTools.result(1001, "", null);
             }else{
                 String newPassword = RandomPassword.createRandomPassword(8);
