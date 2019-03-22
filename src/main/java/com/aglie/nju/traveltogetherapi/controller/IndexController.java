@@ -20,5 +20,11 @@ public class IndexController {
         return "verifying.html";
     }
 
+    @RequestMapping("/create")
+    public String create() {return "create.html";}
+
+    @RequestMapping("/viewuser")
+    public String viewuser() {return "viewuser.html";}
+
 
 }

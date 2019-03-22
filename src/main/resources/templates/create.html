@@ -3,9 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>创建活动</title>
+    <link href="/image/css/bootstrap.css" rel="stylesheet">
+    <script  src="/image/jquery-3.3.1.js"></script>
+    <script src="/image/js/bootstrap.js" ></script>
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation" id="nav">
+    <!--<div class="container-fluid">-->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Travel</a>
 
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation">
+            <a href="/create" >create</a>
+        </li>
+        <li role="presentation">
+            <a href="/manage">manage</a>
+        </li>
+        <li role="presentation">
+            <a href="/verifying" >verfying</a>
+        </li>
+        <li role="presentation">
+            <a href="/viewuser" >viewuser</a>
+        </li>
+
+    </ul>
+
+    </div>
+
+</nav>
+<br>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">City</span>
+    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+    <span class="input-group-addon" id="basic-addon2">Location</span>
+    <input type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon2">
+    <span class="input-group-addon" id="basic-addon3">Title</span>
+    <input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon3">
+    <span class="input-group-addon" id="basic-addon4">Time start</span>
+    <input type="text" class="form-control" placeholder="2019-03-30" aria-describedby="basic-addon4">
+    <span class="input-group-addon" id="basic-addon5">Time end</span>
+    <input type="text" class="form-control" placeholder="2019-04-30" aria-describedby="basic-addon5">
+    <span class="input-group-addon" id="basic-addon6">Price</span>
+    <input type="text" class="form-control" placeholder="￥100" aria-describedby="basic-addon6">
+</div>
+
+
+<div class="form-group">
+    <label for="comment">  &emsp;&emsp;Details :</label>
+    <textarea class="form-control" rows="5" id="comment"></textarea>
+</div>
+
+
+<p>
+    <button type="submit" id="submit" onclick="submit()" class="btn btn-primary btn-lg">创建</button>
+
+</p>
 
 </body>
+<script>
+    function submit() {
+
+        var f = document.getElementsByClassName("form-control")
+        var array = new Array()
+        for( var i = 0 ; i < f.length; i++){
+            array[i] = f[i].value
+            console.log(array[i])
+        }
+        var d = document.getElementById("comment").value
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST", "http://47.100.119.155:8888/api/typeActivities", true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
+        xmlhttp.send("owner=admin&city"+array[0]+"&location="+array[1]+"&title="+array[2]+"&details="+d+"&time_start="+array[3]+"&time_end="+array[4]+"&type=sd&"+array[5]);
+        xmlhttp.onreadystatechange = function (ev) {
+            if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                console.log(xmlhttp.responseText);
+
+            }
+            else if(xmlhttp.status ==404){
+                console.log("failed");
+            }
+
+        }
+
+
+    }
+
+
+
+</script>
 </html>
