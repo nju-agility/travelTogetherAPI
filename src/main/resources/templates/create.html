@@ -73,7 +73,7 @@
         }
         var d = document.getElementById("comment").value
         var xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST", "http://47.100.119.155:8888/api/typeActivities", true);
+        xmlhttp.open("POST", "/api/typeActivities", true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
         xmlhttp.send("owner=admin&city"+array[0]+"&location="+array[1]+"&title="+array[2]+"&details="+d+"&time_start="+array[3]+"&time_end="+array[4]+"&type=sd&"+array[5]);
         xmlhttp.onreadystatechange = function (ev) {
