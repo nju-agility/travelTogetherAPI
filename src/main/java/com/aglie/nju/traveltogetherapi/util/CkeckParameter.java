@@ -8,6 +8,7 @@ import com.aglie.nju.traveltogetherapi.model.TravelNoteInfo;
  */
 public class CkeckParameter {
     public static Boolean checkActivity(ActivityInfo activity){
+        System.out.print(activity);
         return activity.getOwner() != null && activity.getType() != null &&
                 activity.getCity() != null && activity.getLocation() != null &&
                 activity.getTitle() != null && activity.getDetails() != null &&

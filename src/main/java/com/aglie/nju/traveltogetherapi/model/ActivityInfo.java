@@ -128,4 +128,24 @@ public class ActivityInfo {
     public void setActivityURL(String activityURL) {
         this.activityURL = activityURL;
     }
+
+    @Override
+    public String toString() {
+        return "ActivityInfo{" +
+                "aid=" + aid +
+                ", status=" + status +
+                ", owner='" + owner + '\'' +
+                ", city='" + city + '\'' +
+                ", location='" + location + '\'' +
+                ", title='" + title + '\'' +
+                ", details='" + details + '\'' +
+                ", time_start='" + time_start + '\'' +
+                ", time_end='" + time_end + '\'' +
+                ", score=" + score +
+                ", num_of_score=" + num_of_score +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", activityURL='" + activityURL + '\'' +
+                '}';
+    }
 }

@@ -72,20 +72,49 @@
             console.log(array[i])
         }
         var d = document.getElementById("comment").value
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST", "/api/adminAddActivity", true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
-        xmlhttp.send("owner=admin&city="+array[0]+"&location="+array[1]+"&title="+array[2]+"&details="+d+"&time_start="+array[3]+"&time_end="+array[4]+"&type=sd&"+array[5]);
-        xmlhttp.onreadystatechange = function (ev) {
-            if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
-                console.log(xmlhttp.responseText);
+        // var xmlhttp=new XMLHttpRequest();
+        // xmlhttp.open("POST", "/api/adminAddActivity", true);
+        // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
+        // var data = "owner=admin&city="+array[0]+"&location="+array[1]+"&title="+array[2]+"&details="+d+"&time_start="+array[3]+"&time_end="+array[4]+"&type=sd&price="+array[5];
+        // console.log(data);
+        // xmlhttp.send("owner=admin&city=1&location=2&title=3&details=sd&time_start=2019-02-1&time_end=2019-02-13&type=sd&price=122");
+        // xmlhttp.onreadystatechange = function (ev) {
+        //     if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
+        //         console.log(xmlhttp.responseText);
+        //
+        //     }
+        //     else if(xmlhttp.status ==404){
+        //         console.log("failed");
+        //     }
 
-            }
-            else if(xmlhttp.status ==404){
-                console.log("failed");
-            }
+        // }
+        // $.post("/api/adminAddActivity")
 
-        }
+        var data = {
+            "owner":"admin",
+            "city" : array[0],
+            "location": array[1],
+            "title": array[2],
+            "details": d,
+            "time_start":array[3],
+            "time_end" :array[4],
+            "type":"ge",
+            "price":array[5]
+
+        };
+        $.ajax({
+            type:"POST",
+            async:true,
+            url:"/api/adminAddActivity",
+            dataType: "json",
+            data:data,
+            success:function (d) {
+                if(d.resCode == 0){
+                    alert("ok")
+                    location.replace("/create");
+                }
+            }
+        })
 
 
     }
