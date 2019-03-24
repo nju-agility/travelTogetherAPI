@@ -121,28 +121,30 @@
                     console.log(d)
                     // location.replace("/create");
                     flag = true;
-                    // account =
+                    account = d.data.content.aid;
+                    console.log(account);
                 }
             }
         })
 
-        if(true){
+        if(flag){
             var formdata = new FormData();
             formdata.append("file",$("#imgform")[0][0].files[0])
             formdata.append("item",3);
+            formdata.append("account",account);
 
-            // $.ajax({
-            //     type:"POST",
-            //     async:false,
-            //     url:"/api/uploadImg",
-            //     dataType:"json",
-            //     data: new FormData($("#imgform")[0]),
-            //     processData: false,
-            //     contentType: false,
-            //     success:function (e) {
-            //         console.log(e);
-            //     }
-            // })
+            $.ajax({
+                type:"POST",
+                async:false,
+                url:"/api/uploadImg",
+                dataType:"json",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function (e) {
+                    console.log(e);
+                }
+            })
         }
 
 
