@@ -6,6 +6,38 @@
     <link href="/image/css/bootstrap.css" rel="stylesheet">
     <script  src="/image/jquery-3.3.1.js"></script>
     <script src="/image/js/bootstrap.js" ></script>
+    <script>
+        function build(data){
+
+
+        }
+
+        window.onload = function (ev) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET","/api/queryStudent",true);
+            xmlhttp.send();
+            var data = null;
+            xmlhttp.onreadystatechange = function (ev1) {
+                if( xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                    data = $.parseJSON(xmlhttp.responseText).data.content;
+                    for(var i = 0 ; i < data.length ; i ++){
+                            console.log(data[i]);
+                    }
+
+                }
+
+            }
+
+
+
+
+
+        }
+
+
+
+    </script>
+
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation" id="nav">
@@ -30,5 +62,19 @@
     </ul>
     </div>
 </nav>
+<table class="table table-bordered" id="table">
+    <tr >
+        <td ></td>
+        <td>king</td>
+        <td>pd</td>
+    </tr>
+    <tr >
+        <td><img  src="/image/1_lulu@qq.com.jpg" width="10" height="10"></td>
+        <td>king</td>
+        <td>pd</td>
+    </tr>
+
+</table>
+
 </body>
 </html>
