@@ -112,14 +112,13 @@
         };
         $.ajax({
             type:"POST",
-            async:true,
+            async:false,
             url:"/api/adminAddActivity",
             dataType: "json",
             data:data,
             success:function (d) {
                 if(d.resCode == 0){
                     console.log(d)
-                    // location.replace("/create");
                     flag = true;
                     account = d.data.content.aid;
                     console.log(account);
@@ -135,7 +134,7 @@
 
             $.ajax({
                 type:"POST",
-                async:false,
+                async:true,
                 url:"/api/uploadImg",
                 dataType:"json",
                 data: formdata,
@@ -143,6 +142,8 @@
                 contentType: false,
                 success:function (e) {
                     console.log(e);
+                    // location.replace("/create");
+
                 }
             })
         }
