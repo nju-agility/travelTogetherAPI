@@ -7,21 +7,73 @@
     <script  src="/image/jquery-3.3.1.js"></script>
     <script src="/image/js/bootstrap.js" ></script>
     <script>
-        function build(data){
 
-
+        var data = []
+        data[0] = "df"
+        function judge(i,j){
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET","/api/verifyStudent?account="+data[i]["account"] + "&status="+j.toString());
+            xhr.send();
+            xhr.onreadystatechange = function (ev) {
+                if(  xhr.status == 200 && xhr.readyState == 4){
+                    var data = $.parseJSON(xhr.responseText);
+                    if(data.resCode == 0 ){
+                        var node = document.getElementById(i.toString());
+                        node.parentElement.removeChild(node);
+                    }
+                }
+            }
         }
 
         window.onload = function (ev) {
+            // console.log(data[0]);
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET","/api/queryStudent",true);
+            xmlhttp.open("GET", "/api/queryStudent", true);
             xmlhttp.send();
-            var data = null;
+
+            //     {
+            //     "ip":12,
+            //     "name":"image/0_xiangge@qq.com.jpeg"
+            //     },
+            //     {
+            //     "ip":34,
+            //         "name":"image/3_1.jpg"
+            //     }
+            // ]
             xmlhttp.onreadystatechange = function (ev1) {
-                if( xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
                     data = $.parseJSON(xmlhttp.responseText).data.content;
-                    for(var i = 0 ; i < data.length ; i ++){
-                            console.log(data[i]);
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var x = document.getElementById("tab");
+                        var y = x.cloneNode(true);
+                        y.id=i;
+                        var p = y.getElementsByTagName("img")[0]
+                        p.src=data[i].studentPicURL;
+                        // console.log(p.src);
+                        var md6 = y.getElementsByClassName("col-md-6")[1];
+                        console.log("md6");
+                        console.log(md6);
+                        var table = md6.getElementsByClassName("table")[0];
+                        var trs = table.getElementsByTagName("tr");
+                        console.log(trs);
+                        for(var j = 0; j < trs.length - 1; j++){
+                            var t = trs[j].getElementsByTagName("td")[0].children[0].innerHTML;
+                            var td = trs[j].getElementsByTagName("td")[1];
+                            td.innerHTML = data[i][t];
+                        }
+                        var buttons = trs[trs.length - 1].getElementsByTagName("button");
+                        buttons[0].num=i;
+                        buttons[0].onclick = function (ev2) {
+                            judge(ev2.target.num,2);
+                        }
+                        buttons[1].num=i;
+                        buttons[1].onclick = function (ev2) {
+                            judge(ev2.target.num,1);
+                        }
+                        y.style="display:";
+                        x.parentElement.appendChild(y);
+
                     }
 
                 }
@@ -30,10 +82,7 @@
 
 
 
-
-
         }
-
 
 
     </script>
@@ -47,34 +96,116 @@
     </div>
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation">
-            <a href="/create" >create</a>
+            <a href="/create">create</a>
         </li>
         <li role="presentation">
             <a href="/manage">manage</a>
         </li>
         <li role="presentation">
-            <a href="/verifying" >verfying</a>
+            <a href="/verifying">verfying</a>
         </li>
         <li role="presentation">
-            <a href="/viewuser" >viewuser</a>
+            <a href="/viewuser">viewuser</a>
         </li>
 
     </ul>
     </div>
 </nav>
-<table class="table table-bordered" id="table">
-    <tr >
-        <td ></td>
-        <td>king</td>
-        <td>pd</td>
-    </tr>
-    <tr >
-        <td><img  src="/image/1_lulu@qq.com.jpg" width="10" height="10"></td>
-        <td>king</td>
-        <td>pd</td>
-    </tr>
+<table  class="table table-bordered" id="tab" style="display: none;">
+    <tr>
+        <td>
+            <div class="profile-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="profile-inner text-center">
+                                    <div class="profile-img">
+                                        <img id="src" src="image/1_lulu@qq.com.jpg" width="220" hight="220" alt="profle">
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-details mt-230">
+                                <div>
+                                    <div class="section-title">
+                                        <h3>Profile</h3>
+                                    </div>
+                                    <div>
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+
+                                                <td>
+                                                    <span>name</span>
+                                                </td>
+
+                                                <td >Jhon</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    <span>account</span>
+                                                </td>
+
+                                                <td >Jhon Smith</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    <span>age</span>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    <span>city</span>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    <span>school</span>
+                                                </td>
+
+                                                <td>+1-222-333-4050</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-lg">通过</button>
+                                                </td>
+
+                                                <td><button type="button" class="btn btn-primary btn-lg">拒绝</button></td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!--<div class="btn-list">-->
+
+                                    <!--<button type="button" class="btn btn-primary btn-lg">走你</button>-->
+
+                                    <!--<button type="button" class="btn btn-primary btn-lg">走你</button>-->
+
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+
+    </tr>
 </table>
 
+
 </body>
-</html>
