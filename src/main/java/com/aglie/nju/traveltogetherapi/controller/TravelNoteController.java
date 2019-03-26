@@ -35,7 +35,10 @@ public class TravelNoteController {
             }
             int code = travelNoteMapper.createTravelNote(noteInfo);
             if(code == 1){
-                return ResultTools.result(0, "success", null);
+                List<TravelNoteInfo> travelNoteInfos = travelNoteMapper.selectTravelNote(noteInfo.getAccount());
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("content", travelNoteInfos.get(travelNoteInfos.size()-1));
+                return ResultTools.result(0, "success", map);
             }
             return ResultTools.result(404,"failed", null);
         }catch (Exception e){

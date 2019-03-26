@@ -13,13 +13,14 @@ public interface TravelNoteMapper {
     /*******用户创建游记********/
     @Insert("insert into travel_notes(account, city, location, title, details, submission_date)"
             + "values (#{account},#{city},#{location},#{title},#{details},#{submission_date})")
-    public int createTravelNote(TravelNoteInfo noteInfo);
+    int createTravelNote(TravelNoteInfo noteInfo);
 
     /*******查看某用户创建的游记********/
-    @Select("select * from travel_notes where account=#{account}")
-    public List<TravelNoteInfo> selectTravelNote(String account);
+    @Select("select * from travel_notes where account=#{account} order by id")
+    List<TravelNoteInfo> selectTravelNote(String account);
 
     /*******查看所有的游记********/
     @Select("select * from travel_notes")
-    public List<TravelNoteInfo> selectAllTravelNote();
+    List<TravelNoteInfo> selectAllTravelNote();
+
 }

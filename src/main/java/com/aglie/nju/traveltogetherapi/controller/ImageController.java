@@ -52,6 +52,7 @@ public class ImageController {
         }
         if(item == 1){
             UserInfo user = userMapper.selectUserByAccount(account);
+            System.out.println(user.getAccount());
             user.setStatus(1);
             verifyStudentMapper.changeStudentStatus(user);
         }
