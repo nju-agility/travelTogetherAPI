@@ -17,9 +17,7 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET", "/api/checkActivity?aid="+i+"&status="+status, true);
             xmlhttp.send();
-            // xmlhttp.open("POST", "/api/checkActivity", true);
-            // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencode");
-            // xmlhttp.send("aid="+i+"&status="+status);
+
             xmlhttp.onreadystatechange = function (ev) {
                 if(  xmlhttp.status == 200 && xmlhttp.readyState == 4){
                     console.log(xmlhttp.responseText);

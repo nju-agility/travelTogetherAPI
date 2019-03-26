@@ -51,13 +51,20 @@
 
 
 <div class="form-group">
-    <label for="comment">  &emsp;&emsp;Details :</label>
+
+    <label for="comment"> <font>Details :</font></label>
+
     <textarea class="form-control" rows="5" id="comment"></textarea>
-</div>
+<!--</div>-->
+<form  method="post" id="imgform" enctype="multipart/form-data">
+        <input type="file" name="uploadImage" id="uploadImage">
 
-
-<p>
+</form>
     <button type="submit" id="submit" onclick="submit()" class="btn btn-primary btn-lg">创建</button>
+
+</div>
+<p>
+
 
 </p>
 
@@ -89,7 +96,8 @@
 
         // }
         // $.post("/api/adminAddActivity")
-
+        var flag = false;
+        var account ;
         var data = {
             "owner":"admin",
             "city" : array[0],
@@ -104,17 +112,41 @@
         };
         $.ajax({
             type:"POST",
-            async:true,
+            async:false,
             url:"/api/adminAddActivity",
             dataType: "json",
             data:data,
             success:function (d) {
                 if(d.resCode == 0){
-                    alert("ok")
-                    location.replace("/create");
+                    console.log(d)
+                    flag = true;
+                    account = d.data.content.aid;
+                    console.log(account);
                 }
             }
         })
+
+        if(flag){
+            var formdata = new FormData();
+            formdata.append("file",$("#imgform")[0][0].files[0])
+            formdata.append("item",3);
+            formdata.append("account",account);
+
+            $.ajax({
+                type:"POST",
+                async:true,
+                url:"/api/uploadImg",
+                dataType:"json",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function (e) {
+                    console.log(e);
+                    location.replace("/create");
+
+                }
+            })
+        }
 
 
     }
