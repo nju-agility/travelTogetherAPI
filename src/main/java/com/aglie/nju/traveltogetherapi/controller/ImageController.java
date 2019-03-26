@@ -51,6 +51,10 @@ public class ImageController {
             return ResultTools.result(404,e.getMessage(),null);
         }
         if(item == 1){
+            if (account.startsWith("\"") && account.endsWith("\"")){
+                account = account.substring(1,account.length()-1);
+//            System.out.println(account);
+            }
             UserInfo user = userMapper.selectUserByAccount(account);
             System.out.println(user.getAccount());
             user.setStatus(1);
